@@ -12,7 +12,7 @@ use App\Form\VisitorType;
 class VisitorController extends Controller
 {
     /**
-     * @Route("/visitor", name="visitor")
+     * @Route("/", name="app_index")
      */
     public function index(request $request)
     {
