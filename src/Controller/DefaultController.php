@@ -1,12 +1,19 @@
 <?php
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Response ;
 
-class DefaultController
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
+
+
+class DefaultController extends Controller
 {
-    public function index() : Response
+    /**
+     * @Route("/", name="app_index")
+     */
+    public function index()
     {
-        return new  Response('coucou');
-    }
+        return $this->render ('index.html.twig');   }
+
+
 }
