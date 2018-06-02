@@ -19,17 +19,12 @@ class Visitor
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $firstname;
+    private $last_name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $lastname;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $birthday;
+    private $first_name;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -37,57 +32,40 @@ class Visitor
     private $country;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="datetime")
      */
-    private $reduction;
+    private $bithdate;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
-    private $price;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $numbervisitor;
+    private $email;
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getFirstname(): ?string
+    public function getLastName(): ?string
     {
-        return $this->firstname;
+        return $this->last_name;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setLastName(string $last_name): self
     {
-        $this->firstname = $firstname;
+        $this->last_name = $last_name;
 
         return $this;
     }
 
-    public function getLastname(): ?string
+    public function getFirstName(): ?string
     {
-        return $this->lastname;
+        return $this->first_name;
     }
 
-    public function setLastname(string $lastname): self
+    public function setFirstName(string $first_name): self
     {
-        $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    public function getBirthday(): ?\DateTimeInterface
-    {
-        return $this->birthday;
-    }
-
-    public function setBirthday(\DateTimeInterface $birthday): self
-    {
-        $this->birthday = $birthday;
+        $this->first_name = $first_name;
 
         return $this;
     }
@@ -104,38 +82,26 @@ class Visitor
         return $this;
     }
 
-    public function getReduction(): ?bool
+    public function getBithdate(): ?\DateTimeInterface
     {
-        return $this->reduction;
+        return $this->bithdate;
     }
 
-    public function setReduction(?bool $reduction): self
+    public function setBithdate(\DateTimeInterface $bithdate): self
     {
-        $this->reduction = $reduction;
+        $this->bithdate = $bithdate;
 
         return $this;
     }
 
-    public function getPrice(): ?int
+    public function getEmail(): ?string
     {
-        return $this->price;
+        return $this->email;
     }
 
-    public function setPrice(int $price): self
+    public function setEmail(string $email): self
     {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    public function getNumbervisitor(): ?int
-    {
-        return $this->numbervisitor;
-    }
-
-    public function setNumbervisitor(int $numbervisitor): self
-    {
-        $this->numbervisitor = $numbervisitor;
+        $this->email = $email;
 
         return $this;
     }

@@ -19,72 +19,55 @@ class Billet
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    private $type;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $visitdate;
+    private $visit_date;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean")
      */
-    private $coderesa;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $numberresa;
+    private $is_half;
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getType(): ?string
     {
-        return $this->email;
+        return $this->type;
     }
 
-    public function setEmail(string $email): self
+    public function setType(string $type): self
     {
-        $this->email = $email;
+        $this->type = $type;
 
         return $this;
     }
 
-    public function getVisitdate(): ?\DateTimeInterface
+    public function getVisitDate(): ?\DateTimeInterface
     {
-        return $this->visitdate;
+        return $this->visit_date;
     }
 
-    public function setVisitdate(\DateTimeInterface $visitdate): self
+    public function setVisitDate(\DateTimeInterface $visit_date): self
     {
-        $this->visitdate = $visitdate;
+        $this->visit_date = $visit_date;
 
         return $this;
     }
 
-    public function getCoderesa(): ?string
+    public function getIsHalf(): ?bool
     {
-        return $this->coderesa;
+        return $this->is_half;
     }
 
-    public function setCoderesa(string $coderesa): self
+    public function setIsHalf(bool $is_half): self
     {
-        $this->coderesa = $coderesa;
-
-        return $this;
-    }
-
-    public function getNumberresa(): ?int
-    {
-        return $this->numberresa;
-    }
-
-    public function setNumberresa(int $numberresa): self
-    {
-        $this->numberresa = $numberresa;
+        $this->is_half = $is_half;
 
         return $this;
     }
