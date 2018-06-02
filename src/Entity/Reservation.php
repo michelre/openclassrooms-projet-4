@@ -26,6 +26,7 @@ class Reservation
      */
     private $code;
 
+
     public function getId()
     {
         return $this->id;
@@ -54,4 +55,5 @@ class Reservation
 
         return $this;
     }
+
 }
