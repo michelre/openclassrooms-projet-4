@@ -2,7 +2,19 @@ $color_head: #fff;
 
 body{
   background: #B0413E;
+  height: 100%;
+  width: 100%;
+  font-family: 'Roboto', sans-serif !important;
 
 
 }
+.global-container{
+  background:white;
 
+  }
+
+.wallpaper {
+  background-image: url("../image/louvre.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+}
