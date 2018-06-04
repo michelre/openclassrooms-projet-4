@@ -3,6 +3,7 @@
 {% block title %}Infos personnelles{% endblock %}
 
 {% block body %}
+    <div class="global-container">
     <section>
         {{ form_start(form) }}
             {{ form_row(form.last_name) }}
@@ -14,5 +15,6 @@
         <button type="submit">Valider</button>
         {{ form_end(form) }}
     </section>
+    </div>
 
 {% endblock %}

@@ -12,7 +12,7 @@ use App\Form\VisitorType;
 class VisitorController extends Controller
 {
     /**
-     * @Route("/", name="app_index")
+     * @Route("/visitor", name="visitor")
      */
     public function index(request $request)
     {
@@ -28,5 +28,7 @@ class VisitorController extends Controller
         return $this->render('visitor/index.html.twig', [
             'form' => $form->createView()
         ]);
+
+
     }
 }
