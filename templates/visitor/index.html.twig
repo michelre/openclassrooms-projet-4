@@ -3,8 +3,13 @@
 {% block title %}Infos personnelles{% endblock %}
 
 {% block body %}
-    <div class="global-container rounded">
-    <section class="m-3 pb-3 pt-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info "><div class="navbar-brand text-white"><h3>Bienvenue au musée du Louvre<h3> </div></nav>
+    <div class="global-container border border-dark">
+        <div class="container-info text-center border border-dark">
+        <div>Vous souhaitez acheter votre billet en ligne</div>
+        <div>Merci de renseigner votre identité</div>
+        </div>
+    <section class="m-3 pb-3 pt-3 border rounded-circle">
         {{ form_start(form) }}
             {{ form_row(form.last_name) }}
             {{ form_row(form.first_name) }}
@@ -17,4 +22,21 @@
     </section>
     </div>
 
+    <footer>
+        <div class="bas">
+            <div class="container-fluid  text-center  mt-2">
+
+
+                {% block footer %}{% endblock %}
+
+                <div class="footer-copyright text-white  ">
+                    © 2018 Copyright:
+                    <a> Anne Gasté </a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
 {% endblock %}
+
