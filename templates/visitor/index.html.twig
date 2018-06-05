@@ -3,8 +3,8 @@
 {% block title %}Infos personnelles{% endblock %}
 
 {% block body %}
-    <div class="global-container">
-    <section>
+    <div class="global-container rounded">
+    <section class="m-3 pb-3 pt-3">
         {{ form_start(form) }}
             {{ form_row(form.last_name) }}
             {{ form_row(form.first_name) }}
@@ -12,7 +12,7 @@
             {{ form_row(form.bithdate) }}
             {{ form_row(form.email) }}
 
-        <button type="submit">Valider</button>
+        <button class="btn badge-success" type="submit">Valider</button>
         {{ form_end(form) }}
     </section>
     </div>
