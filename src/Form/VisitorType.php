@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 
 class VisitorType extends AbstractType
@@ -17,8 +17,8 @@ class VisitorType extends AbstractType
         $builder
             ->add('last_name', TextType::class, array('label' => 'Nom'))
             ->add('first_name', TextType::class, array('label' => 'Prénom'))
-            ->add('country', TextType::class, array('label' => 'Pays'))
-            ->add('bithdate', DateTimeType::class, array('label' => 'Date de naissance'))
+            ->add('country',TextType::class, array('label' => 'Pays'))
+            ->add('bithdate', DateType::class, array('label' => 'Date de naissance'))
             ->add('email', TextType::class, array('label' => 'Adresse mail'))
         ;
     }

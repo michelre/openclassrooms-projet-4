@@ -22,6 +22,7 @@ class BilletController extends Controller
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
             $em->persist($Billet);
             $em->flush();
+
         }
 
         return $this->render('billet/index.html.twig', [

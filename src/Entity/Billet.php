@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BilletRepository")
  */
@@ -30,6 +31,30 @@ class Billet
      * @ORM\Column(type="boolean")
      */
     private $is_half;
+
+    /**
+     * ORM\@OneToOne(targetEntity="Visitor", inversedBy="billet")
+     * ORM\@JoinColumn(name="visitor_id", referencedColumnName="id")
+     */
+    private $visitor;
+
+    /**
+     * @return mixed
+     */
+    public function getVisitor()
+    {
+        return $this->visitor;
+    }
+
+    /**
+     * @param mixed $visitor
+     */
+    public function setVisitor($visitor): void
+    {
+        $this->visitor = $visitor;
+    }
+
+
 
     public function getId()
     {
@@ -71,4 +96,8 @@ class Billet
 
         return $this;
     }
+
+
+
+
 }

@@ -41,6 +41,27 @@ class Visitor
      */
     private $email;
 
+    /**
+     *ORM\@OneToOne(targetEntity="Billet", mappedBy="visitor")
+     */
+    private $billet;
+
+    /**
+     * @return mixed
+     */
+    public function getBillet()
+    {
+        return $this->billet;
+    }
+
+    /**
+     * @param mixed $billet
+     */
+    public function setBillet($billet): void
+    {
+        $this->billet = $billet;
+    }
+
     public function getId()
     {
         return $this->id;

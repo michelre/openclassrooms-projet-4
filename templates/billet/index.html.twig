@@ -3,13 +3,47 @@
 {% block title %}Billet{% endblock %}
 
 {% block body %}
-    <section>
-        {{ form_start(form) }}
-        {{ form_row(form.type) }}
-        {{ form_row(form.visit_date) }}
-        {{ form_row(form.is_half) }}
 
-        <button type="submit">Valider</button>
+    <div class="global-container border border-dark">
+    <div class="container-info text-center border border-dark">
+
+
+
+    <div class="m-3 pb-3 pt-3 border">
+        {{ form_start(form)}}
+
+        <div class="form-group">
+            {{ form_label(form.type, "", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+            {{ form_errors(form.type) }}
+            <div class="col-sm-4">
+                {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.visit_date, "", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+            {{ form_errors(form.visit_date) }}
+            <div class="col-sm-4">
+                {{ form_widget(form.visit_date, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            {{ form_label(form.is_half, "", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+            {{ form_errors(form.is_half) }}
+            <div class="col-sm-4">
+                {{ form_widget(form.is_half, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+
+        <button class="btn badge-success" type="submit">Valider</button>
         {{ form_end(form) }}
-    </section>
+    </div>
+    </div>
+</div>
+
 {% endblock %}

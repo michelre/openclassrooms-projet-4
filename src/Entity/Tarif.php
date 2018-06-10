@@ -26,6 +26,14 @@ class Tarif
      */
     private $price;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $billet_id;
+
+
+
+
     public function getId()
     {
         return $this->id;
@@ -53,5 +61,17 @@ class Tarif
         $this->price = $price;
 
         return $this;
+    }
+
+
+    public function getBilletId()
+    {
+        return $this->billet_id;
+    }
+
+
+    public function setBilletId($billet_id): void
+    {
+        $this->billet_id = $billet_id;
     }
 }

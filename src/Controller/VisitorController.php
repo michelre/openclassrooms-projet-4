@@ -9,6 +9,7 @@ use App\Entity\Visitor;
 use App\Form\VisitorType;
 
 
+
 class VisitorController extends Controller
 {
     /**
@@ -23,12 +24,15 @@ class VisitorController extends Controller
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
             $em->persist($visitor);
             $em->flush();
+
+
+            return $this->redirectToRoute("billet");
         }
 
         return $this->render('visitor/index.html.twig', [
             'form' => $form->createView()
         ]);
 
-
     }
+
 }

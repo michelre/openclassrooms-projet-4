@@ -26,6 +26,14 @@ class Reservation
      */
     private $code;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $tarif_id;
+
+
+
+
 
     public function getId()
     {
@@ -54,6 +62,17 @@ class Reservation
         $this->code = $code;
 
         return $this;
+    }
+
+
+    public function getTarifId()
+    {
+        return $this->tarif_id;
+    }
+
+    public function setTarifId($tarif_id): void
+    {
+        $this->tarif_id = $tarif_id;
     }
 
 }
