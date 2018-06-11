@@ -33,26 +33,15 @@ class Billet
     private $is_half;
 
     /**
-     * ORM\@OneToOne(targetEntity="Visitor", inversedBy="billet")
-     * ORM\@JoinColumn(name="visitor_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="App\Entity\Visitor", inversedBy="billet", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $visitor;
 
-    /**
-     * @return mixed
-     */
-    public function getVisitor()
-    {
-        return $this->visitor;
-    }
 
-    /**
-     * @param mixed $visitor
-     */
-    public function setVisitor($visitor): void
-    {
-        $this->visitor = $visitor;
-    }
+
+
+
 
 
 
@@ -96,6 +85,20 @@ class Billet
 
         return $this;
     }
+
+    public function getVisitor(): ?Visitor
+    {
+        return $this->visitor;
+    }
+
+    public function setVisitor(Visitor $visitor): self
+    {
+        $this->visitor = $visitor;
+
+        return $this;
+    }
+
+   
 
 
 

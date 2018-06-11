@@ -3,12 +3,18 @@
 namespace App\Form;
 
 use App\Entity\Billet;
+use App\Entity\Visitor;
+use Doctrine\ORM\Mapping\Id;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Bundle\MakerBundle\Doctrine\RelationOneToOne;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
+
 
 class BilletType extends AbstractType
 {
@@ -26,8 +32,8 @@ class BilletType extends AbstractType
             ->add('is_half', CheckboxType::class, array(
                 'label'    => 'Je suis: étudiant, employé du musée, d’un service du Ministère de la Culture, militaire… (un justificatif vous sera damandé)',
                 'required' => true,))
+            ;
 
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -42,26 +42,13 @@ class Visitor
     private $email;
 
     /**
-     *ORM\@OneToOne(targetEntity="Billet", mappedBy="visitor")
+     * @ORM\OneToOne(targetEntity="App\Entity\Billet", mappedBy="visitor", cascade={"persist", "remove"})
      */
     private $billet;
 
-    /**
-     * @return mixed
-     */
-    public function getBillet()
-    {
-        return $this->billet;
-    }
 
-    /**
-     * @param mixed $billet
-     */
-    public function setBillet($billet): void
-    {
-        $this->billet = $billet;
-    }
 
+ 
     public function getId()
     {
         return $this->id;
@@ -126,4 +113,24 @@ class Visitor
 
         return $this;
     }
+
+    public function getBillet(): ?Billet
+    {
+        return $this->billet;
+    }
+
+    public function setBillet(Billet $billet): self
+    {
+        $this->billet = $billet;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $billet->getVisitor()) {
+            $billet->setVisitor($this);
+        }
+
+        return $this;
+    }
+
+
+    
 }

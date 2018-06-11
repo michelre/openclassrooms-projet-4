@@ -20,7 +20,7 @@ class VisitorType extends AbstractType
             ->add('country',TextType::class, array('label' => 'Pays'))
             ->add('bithdate', DateType::class, array('label' => 'Date de naissance'))
             ->add('email', TextType::class, array('label' => 'Adresse mail'))
-        ;
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
