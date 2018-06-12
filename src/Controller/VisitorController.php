@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Visitor;
 use App\Form\VisitorType;
 use App\Entity\Billet;
+use Monolog\Logger;
 
 
 
@@ -25,18 +26,16 @@ class VisitorController extends Controller
 
 
 
-
         $form = $this->createForm(VisitorType::class, $visitor);
 
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
             $em->persist($visitor);
 
+            $em->flush();
 
-
-
-
-            return $this->redirectToRoute("billet");
+           
+            return $this->redirectToRoute("billet", array('visitorId' => $visitor->getId()));
         }
 
         return $this->render('visitor/index.html.twig', [

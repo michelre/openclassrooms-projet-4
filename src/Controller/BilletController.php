@@ -9,25 +9,36 @@ use App\Entity\Billet;
 use App\Form\BilletType;
 use App\Form\VisitorType;
 USE App\Entity\Visitor;
+use Monolog\Logger;
+
 
 class BilletController extends Controller
 {
     /**
-     * @Route("/billet", name="billet")
+     * @Route("/billet/{visitorId}", name="billet")
      */
-    public function index(request $request)
+    public function index(request $request, $visitorId)
     {
+
+
         $em = $this->getDoctrine()->getManager();
-        $Billet = new Billet();
+
+        $visitor = $this->getDoctrine()->getRepository(Visitor::class);
+
+        $visitor->find($visitorId);
 
 
+        $billet = new Billet();
 
-        $form = $this->createForm(BilletType::class, $Billet);
+
+        $billet->setVisitor($visitorId);
+
+        $form = $this->createForm(BilletType::class, $billet);
 
 
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
-            $em->persist($Billet);
+            $em->persist($billet);
             $em->flush();
 
         }
