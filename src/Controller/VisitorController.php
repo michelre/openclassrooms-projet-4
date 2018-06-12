@@ -34,7 +34,7 @@ class VisitorController extends Controller
 
             $em->flush();
 
-           
+
             return $this->redirectToRoute("billet", array('visitorId' => $visitor->getId()));
         }
 

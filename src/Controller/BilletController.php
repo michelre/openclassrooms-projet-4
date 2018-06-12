@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\Mapping\Id;
+use phpDocumentor\Reflection\Types\Integer;
+use PhpParser\Node\Expr\Cast\Int_;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,13 +28,14 @@ class BilletController extends Controller
 
         $visitor = $this->getDoctrine()->getRepository(Visitor::class);
 
-        $visitor->find($visitorId);
+
 
 
         $billet = new Billet();
 
 
-        $billet->setVisitor($visitorId);
+        $billet->setVisitor( $visitor->find($visitorId));
+
 
         $form = $this->createForm(BilletType::class, $billet);
 
@@ -40,6 +44,8 @@ class BilletController extends Controller
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
             $em->persist($billet);
             $em->flush();
+
+
 
         }
 

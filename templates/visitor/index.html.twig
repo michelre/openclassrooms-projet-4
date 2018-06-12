@@ -3,7 +3,7 @@
 {% block title %}Infos personnelles{% endblock %}
 
 {% block body %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-info "><div class="navbar-brand text-white"><h3>Bienvenue au musée du Louvre<h3> </div></nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-info "><div class="navbar-brand text-white"><h3>Bienvenue au musée du Louvre</h3></div></nav>
     <div class="global-container border border-dark">
         <div class="container-info text-center border border-dark">
             <div>Vous souhaitez acheter votre billet en ligne</div>
@@ -15,15 +15,15 @@
             <div class="form-group">
                 {{ form_label(form.last_name, "", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                 {{ form_errors(form.last_name) }}
-                <div class="col-sm-4">
+                <div class="col-sm-7 ">
                     {{ form_widget(form.last_name, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" >
                 {{ form_label(form.first_name, "", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                 {{ form_errors(form.first_name) }}
-                <div class="col-sm-4">
+                <div class="col-sm-7">
                     {{ form_widget(form.first_name, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
@@ -31,25 +31,26 @@
             <div class="form-group">
                 {{ form_label(form.country, "", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                 {{ form_errors(form.country) }}
-                <div class="col-sm-4">
+                <div class="col-sm-7">
                     {{ form_widget(form.country, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
 
-            <div class="">
-                {{ form_label(form.bithdate, "", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+            <div>
+                {{ form_label(form.bithdate, "", {'label_attr': {'class': ' col-sm-3 control-label'}}) }}
                 {{ form_errors(form.bithdate) }}
-                <div class="col-sm-4">
-                    {{ form_widget(form.bithdate, {'attr': {'class': 'datepicker'}}) }}
+                <div class="col-sm-7 ">
+                    {{ form_widget(form.bithdate, {'attr': {'class': 'js-datepicker', 'autocomplete' : 'off'}}) }}
                 </div>
             </div>
+
 
 
 
             <div class="form-group">
                 {{ form_label(form.email, "", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                 {{ form_errors(form.email) }}
-                <div class="col-sm-4">
+                <div class="col-sm-7">
                     {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
