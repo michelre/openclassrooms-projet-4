@@ -33,6 +33,18 @@
                         dateFormat: 'yy-mm-dd'
                     });
                 });
+                const tarifPrice = document.querySelector('#tarif_price');
+                const tarifName = document.querySelector('#tarif_name');
+                const tarifs = {
+                    Normal:16,
+                    Enfant:8,
+                    Senior:12,
+                    Gratuit:0
+                };
+                tarifPrice.value = tarifs[tarifName.value];
+                tarifName.addEventListener ('change', function () {
+                   tarifPrice.value = tarifs[tarifName.value];
+                })
             </script>
         {% endblock %}
     </body>

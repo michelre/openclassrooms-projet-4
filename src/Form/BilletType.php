@@ -21,12 +21,11 @@ class BilletType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type',ChoiceType::class, array('label' =>'Je souhaite une place :',
+            ->add('type',ChoiceType::class, array('label' =>'Je souhaite une place pour:',
         'choices'  => array(
-            'Normal (16 euros), à partir de 12 ans '=> '16',
-            'Enfant (8 euros), de 4 à 12 ans' => '8',
-            'Senior (12 euros), à partir de 60 ans' => '12',
-            'Gratuit si l/enfant à moins de 4 ans' => '0',
+            'Journée'=> 'journée',
+            'Demi-journée' => 'demi-journée',
+
             )))
             ->add('visit_date', DateType::class, array(
                 'widget' => 'single_text',

@@ -37,3 +37,8 @@ body{
 .container-info{
 
 }
+
+.disabled-input{
+  background: #c3c3c3 !important;
+  pointer-events: none !important;
+}
