@@ -38,6 +38,12 @@ class Billet
      */
     private $visitor;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Tarif", mappedBy="billet", cascade={"persist", "remove"})
+     */
+    private $Tarifs;
+
+
 
 
 
@@ -97,6 +103,25 @@ class Billet
 
         return $this;
     }
+
+    public function getTarifs(): ?Tarif
+    {
+        return $this->Tarifs;
+    }
+
+    public function setTarifs(Tarif $Tarifs): self
+    {
+        $this->Tarifs = $Tarifs;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $Tarifs->getBillet()) {
+            $Tarifs->setBillet($this);
+        }
+
+        return $this;
+    }
+
+
 
    
 

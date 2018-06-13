@@ -34,7 +34,6 @@ class VisitorType extends AbstractType
             ->add('email', EmailType::class, array('label' => 'Adresse mail'))
             ;
     }
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

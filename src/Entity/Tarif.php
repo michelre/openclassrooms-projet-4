@@ -27,9 +27,19 @@ class Tarif
     private $price;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToOne(targetEntity="App\Entity\Billet", inversedBy="Tarifs", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $billet_id;
+    private $billet;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Reservation", mappedBy="tarif", cascade={"persist", "remove"})
+     */
+    private $Reservations;
+
+
+
+
 
 
 
@@ -63,15 +73,35 @@ class Tarif
         return $this;
     }
 
-
-    public function getBilletId()
+    public function getBillet(): ?Billet
     {
-        return $this->billet_id;
+        return $this->billet;
+    }
+
+    public function setBillet(Billet $billet): self
+    {
+        $this->billet = $billet;
+
+        return $this;
+    }
+
+    public function getReservations(): ?Reservation
+    {
+        return $this->Reservations;
+    }
+
+    public function setReservations(Reservation $Reservations): self
+    {
+        $this->Reservations = $Reservations;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $Reservations->getTarif()) {
+            $Reservations->setTarif($this);
+        }
+
+        return $this;
     }
 
 
-    public function setBilletId($billet_id): void
-    {
-        $this->billet_id = $billet_id;
-    }
+
 }

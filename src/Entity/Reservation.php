@@ -27,9 +27,11 @@ class Reservation
     private $code;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToOne(targetEntity="App\Entity\Tarif", inversedBy="Reservations", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $tarif_id;
+    private $tarif;
+
 
 
 
@@ -64,15 +66,20 @@ class Reservation
         return $this;
     }
 
-
-    public function getTarifId()
+    public function getTarif(): ?Tarif
     {
-        return $this->tarif_id;
+        return $this->tarif;
     }
 
-    public function setTarifId($tarif_id): void
+    public function setTarif(Tarif $tarif): self
     {
-        $this->tarif_id = $tarif_id;
+        $this->tarif = $tarif;
+
+        return $this;
     }
+
+   
+
+
 
 }
