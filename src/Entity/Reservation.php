@@ -27,10 +27,12 @@ class Reservation
     private $code;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Tarif", inversedBy="Reservations", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Tarif", inversedBy="reservation", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $tarif;
+
+
 
 
 
@@ -77,6 +79,7 @@ class Reservation
 
         return $this;
     }
+
 
    
 

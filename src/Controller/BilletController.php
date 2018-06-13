@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Billet;
 use App\Form\BilletType;
 use App\Form\VisitorType;
-USE App\Entity\Visitor;
+Use App\Entity\Visitor;
 use Monolog\Logger;
 
 
@@ -29,28 +29,27 @@ class BilletController extends Controller
         $visitor = $this->getDoctrine()->getRepository(Visitor::class);
 
 
-
-
         $billet = new Billet();
 
 
-        $billet->setVisitor( $visitor->find($visitorId));
+        $billet->setVisitor($visitor->find($visitorId));
+
 
 
         $form = $this->createForm(BilletType::class, $billet);
 
 
-
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $em->persist($billet);
             $em->flush();
 
 
-
+            return $this->redirectToRoute("tarif", array('billetId' => $billet->getId(), 'billetType' => $billet->getType()));
         }
 
         return $this->render('billet/index.html.twig', [
             'form' => $form->createView()
         ]);
+
     }
 }

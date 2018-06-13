@@ -3,5 +3,49 @@
 {% block title %}tarif{% endblock %}
 
 {% block body %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-info "><div class="navbar-brand text-white"><h3>Bienvenue au musée du Louvre</h3></div></nav>
+    <div class="global-container border border-dark">
+
+        <div class="m-3 pb-3 pt-3 border">
+            {{ form_start(form)}}
+
+            <div class="form-group">
+                {{ form_label(form.name, "", {'label_attr': {'class': 'col-sm-8 control-label'}}) }}
+                {{ form_errors(form.name) }}
+                <div class="col-sm-7">
+                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                {{ form_label(form.price, "", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                {{ form_errors(form.price) }}
+                <div class="col-sm-4">
+                    {{ form_widget(form.price, {'attr': {'class': ''}}) }}
+                </div>
+            </div>
+
+
+
+            <button class="btn badge-success" type="submit">Valider</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+    <footer>
+        <div class="bas">
+            <div class="container-fluid  text-center  mt-2">
+
+                {% block footer %}{% endblock %}
+
+                <div class="footer-copyright text-white  ">
+                    © 2018 Copyright:
+                    <a> Anne Gasté </a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
 
 {% endblock %}
