@@ -12,6 +12,7 @@ use App\Entity\Billet;
 
 
 
+
 class VisitorController extends Controller
 {
     /**
@@ -19,18 +20,19 @@ class VisitorController extends Controller
      */
     public function index(request $request)
     {
+
         $em = $this->getDoctrine()->getManager();
+
         $visitor = new Visitor();
-
-
-
-
 
         $form = $this->createForm(VisitorType::class, $visitor);
 
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
+
             $em->persist($visitor);
+
 
             $em->flush();
 

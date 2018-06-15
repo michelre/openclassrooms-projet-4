@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Visitor;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -32,6 +33,7 @@ class VisitorType extends AbstractType
 
                 'attr' => ['class' => 'js-datepicker']))
             ->add('email', EmailType::class, array('label' => 'Adresse mail'))
+
             ;
     }
     public function configureOptions(OptionsResolver $resolver)
