@@ -40,11 +40,11 @@ class BilletController extends Controller
 
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $em->persist($billet);
-            $em->flush();
+     //       $em->persist($billet);
+       //     $em->flush();
 
 
-            return $this->redirectToRoute("tarif", array('billetId' => $billet->getId(), 'billetType' => $billet->getType()));
+        //    return $this->redirectToRoute("tarif", array('billetId' => $billet->getId(), 'billetType' => $billet->getType()));
         }
 
         return $this->render('billet/index.html.twig', [

@@ -1,122 +1,113 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Le Louvre{% endblock %}</title>
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-            <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-            <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-            <link rel="stylesheet" href="/resources/demos/style.css">
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-            <script>
-                $(document).ready(function (ajouter) {
-                    //variables
-                    var html ='<div><div class="form-group">\n' +
-                        '                <label class="col-sm-3 control-label required" for="visitor_last_name">Nom</label>\n' +
-                        '                \n' +
-                        '                <div class="col-sm-7 ">\n' +
-                        '                    <input type="text" id="childvisitor_last_name" name="visitor[last_name]" required="required" class="form-control" />\n' +
-                        '                </div>\n' +
-                        '            </div>\n' +
-                        '\n' +
-                        '            <div class="form-group" >\n' +
-                        '                <label class="col-sm-3 control-label required" for="visitor_first_name">Prénom</label>\n' +
-                        '                \n' +
-                        '                <div class="col-sm-7">\n' +
-                        '                    <input type="text" id="childvisitor_first_name" name="visitor[first_name]" required="required" class="form-control" />\n' +
-                        '                </div>\n' +
-                        '            </div>\n' +
-                        '\n' +
-                        '            <div class="form-group">\n' +
-                        '                <label class="col-sm-3 control-label required" for="visitor_country">pays</label>\n' +
-                        '                \n' +
-                        '                <div class="col-sm-7">\n' +
-                        '                    <select id="childvisitor_country" name="visitor[country]" class="form-control"><option value="FR">France</option><option value="DE">Germany</option><option value="ES">Spain</option><option value="GB">United Kingdom</option><option disabled="disabled">-------------------</option><option value="AF">Afghanistan</option><option value="AX">Åland Islands</option><option value="AL">Albania</option><option value="DZ">Algeria</option><option value="AS">American Samoa</option><option value="AD">Andorra</option><option value="AO">Angola</option><option value="AI">Anguilla</option><option value="AQ">Antarctica</option><option value="AG">Antigua &amp; Barbuda</option><option value="AR">Argentina</option><option value="AM">Armenia</option><option value="AW">Aruba</option><option value="AC">Ascension Island</option><option value="AU">Australia</option><option value="AT">Austria</option><option value="AZ">Azerbaijan</option><option value="BS">Bahamas</option><option value="BH">Bahrain</option><option value="BD">Bangladesh</option><option value="BB">Barbados</option><option value="BY">Belarus</option><option value="BE">Belgium</option><option value="BZ">Belize</option><option value="BJ">Benin</option><option value="BM">Bermuda</option><option value="BT">Bhutan</option><option value="BO">Bolivia</option><option value="BA">Bosnia &amp; Herzegovina</option><option value="BW">Botswana</option><option value="BR">Brazil</option><option value="IO">British Indian Ocean Territory</option><option value="VG">British Virgin Islands</option><option value="BN">Brunei</option><option value="BG">Bulgaria</option><option value="BF">Burkina Faso</option><option value="BI">Burundi</option><option value="KH">Cambodia</option><option value="CM">Cameroon</option><option value="CA">Canada</option><option value="IC">Canary Islands</option><option value="CV">Cape Verde</option><option value="BQ">Caribbean Netherlands</option><option value="KY">Cayman Islands</option><option value="CF">Central African Republic</option><option value="EA">Ceuta &amp; Melilla</option><option value="TD">Chad</option><option value="CL">Chile</option><option value="CN">China</option><option value="CX">Christmas Island</option><option value="CC">Cocos (Keeling) Islands</option><option value="CO">Colombia</option><option value="KM">Comoros</option><option value="CG">Congo - Brazzaville</option><option value="CD">Congo - Kinshasa</option><option value="CK">Cook Islands</option><option value="CR">Costa Rica</option><option value="CI">Côte d’Ivoire</option><option value="HR">Croatia</option><option value="CU">Cuba</option><option value="CW">Curaçao</option><option value="CY">Cyprus</option><option value="CZ">Czechia</option><option value="DK">Denmark</option><option value="DG">Diego Garcia</option><option value="DJ">Djibouti</option><option value="DM">Dominica</option><option value="DO">Dominican Republic</option><option value="EC">Ecuador</option><option value="EG">Egypt</option><option value="SV">El Salvador</option><option value="GQ">Equatorial Guinea</option><option value="ER">Eritrea</option><option value="EE">Estonia</option><option value="ET">Ethiopia</option><option value="EZ">Eurozone</option><option value="FK">Falkland Islands</option><option value="FO">Faroe Islands</option><option value="FJ">Fiji</option><option value="FI">Finland</option><option value="GF">French Guiana</option><option value="PF">French Polynesia</option><option value="TF">French Southern Territories</option><option value="GA">Gabon</option><option value="GM">Gambia</option><option value="GE">Georgia</option><option value="GH">Ghana</option><option value="GI">Gibraltar</option><option value="GR">Greece</option><option value="GL">Greenland</option><option value="GD">Grenada</option><option value="GP">Guadeloupe</option><option value="GU">Guam</option><option value="GT">Guatemala</option><option value="GG">Guernsey</option><option value="GN">Guinea</option><option value="GW">Guinea-Bissau</option><option value="GY">Guyana</option><option value="HT">Haiti</option><option value="HN">Honduras</option><option value="HK">Hong Kong SAR China</option><option value="HU">Hungary</option><option value="IS">Iceland</option><option value="IN">India</option><option value="ID">Indonesia</option><option value="IR">Iran</option><option value="IQ">Iraq</option><option value="IE">Ireland</option><option value="IM">Isle of Man</option><option value="IL">Israel</option><option value="IT">Italy</option><option value="JM">Jamaica</option><option value="JP">Japan</option><option value="JE">Jersey</option><option value="JO">Jordan</option><option value="KZ">Kazakhstan</option><option value="KE">Kenya</option><option value="KI">Kiribati</option><option value="XK">Kosovo</option><option value="KW">Kuwait</option><option value="KG">Kyrgyzstan</option><option value="LA">Laos</option><option value="LV">Latvia</option><option value="LB">Lebanon</option><option value="LS">Lesotho</option><option value="LR">Liberia</option><option value="LY">Libya</option><option value="LI">Liechtenstein</option><option value="LT">Lithuania</option><option value="LU">Luxembourg</option><option value="MO">Macau SAR China</option><option value="MK">Macedonia</option><option value="MG">Madagascar</option><option value="MW">Malawi</option><option value="MY">Malaysia</option><option value="MV">Maldives</option><option value="ML">Mali</option><option value="MT">Malta</option><option value="MH">Marshall Islands</option><option value="MQ">Martinique</option><option value="MR">Mauritania</option><option value="MU">Mauritius</option><option value="YT">Mayotte</option><option value="MX">Mexico</option><option value="FM">Micronesia</option><option value="MD">Moldova</option><option value="MC">Monaco</option><option value="MN">Mongolia</option><option value="ME">Montenegro</option><option value="MS">Montserrat</option><option value="MA">Morocco</option><option value="MZ">Mozambique</option><option value="MM">Myanmar (Burma)</option><option value="NA">Namibia</option><option value="NR">Nauru</option><option value="NP">Nepal</option><option value="NL">Netherlands</option><option value="NC">New Caledonia</option><option value="NZ">New Zealand</option><option value="NI">Nicaragua</option><option value="NE">Niger</option><option value="NG">Nigeria</option><option value="NU">Niue</option><option value="NF">Norfolk Island</option><option value="KP">North Korea</option><option value="MP">Northern Mariana Islands</option><option value="NO">Norway</option><option value="OM">Oman</option><option value="PK">Pakistan</option><option value="PW">Palau</option><option value="PS">Palestinian Territories</option><option value="PA">Panama</option><option value="PG">Papua New Guinea</option><option value="PY">Paraguay</option><option value="PE">Peru</option><option value="PH">Philippines</option><option value="PN">Pitcairn Islands</option><option value="PL">Poland</option><option value="PT">Portugal</option><option value="PR">Puerto Rico</option><option value="QA">Qatar</option><option value="RE">Réunion</option><option value="RO">Romania</option><option value="RU">Russia</option><option value="RW">Rwanda</option><option value="WS">Samoa</option><option value="SM">San Marino</option><option value="ST">São Tomé &amp; Príncipe</option><option value="SA">Saudi Arabia</option><option value="SN">Senegal</option><option value="RS">Serbia</option><option value="SC">Seychelles</option><option value="SL">Sierra Leone</option><option value="SG">Singapore</option><option value="SX">Sint Maarten</option><option value="SK">Slovakia</option><option value="SI">Slovenia</option><option value="SB">Solomon Islands</option><option value="SO">Somalia</option><option value="ZA">South Africa</option><option value="GS">South Georgia &amp; South Sandwich Islands</option><option value="KR">South Korea</option><option value="SS">South Sudan</option><option value="LK">Sri Lanka</option><option value="BL">St. Barthélemy</option><option value="SH">St. Helena</option><option value="KN">St. Kitts &amp; Nevis</option><option value="LC">St. Lucia</option><option value="MF">St. Martin</option><option value="PM">St. Pierre &amp; Miquelon</option><option value="VC">St. Vincent &amp; Grenadines</option><option value="SD">Sudan</option><option value="SR">Suriname</option><option value="SJ">Svalbard &amp; Jan Mayen</option><option value="SZ">Swaziland</option><option value="SE">Sweden</option><option value="CH">Switzerland</option><option value="SY">Syria</option><option value="TW">Taiwan</option><option value="TJ">Tajikistan</option><option value="TZ">Tanzania</option><option value="TH">Thailand</option><option value="TL">Timor-Leste</option><option value="TG">Togo</option><option value="TK">Tokelau</option><option value="TO">Tonga</option><option value="TT">Trinidad &amp; Tobago</option><option value="TA">Tristan da Cunha</option><option value="TN">Tunisia</option><option value="TR">Turkey</option><option value="TM">Turkmenistan</option><option value="TC">Turks &amp; Caicos Islands</option><option value="TV">Tuvalu</option><option value="UM">U.S. Outlying Islands</option><option value="VI">U.S. Virgin Islands</option><option value="UG">Uganda</option><option value="UA">Ukraine</option><option value="AE">United Arab Emirates</option><option value="UN">United Nations</option><option value="US">United States</option><option value="UY">Uruguay</option><option value="UZ">Uzbekistan</option><option value="VU">Vanuatu</option><option value="VA">Vatican City</option><option value="VE">Venezuela</option><option value="VN">Vietnam</option><option value="WF">Wallis &amp; Futuna</option><option value="EH">Western Sahara</option><option value="YE">Yemen</option><option value="ZM">Zambia</option><option value="ZW">Zimbabwe</option></select>\n' +
-                        '                </div>\n' +
-                        '            </div>\n' +
-                        '\n' +
-                        '            <div>\n' +
-                        '                <label class="col-sm-3 control-label required" for="visitor_bithdate">Date de naissance</label>\n' +
-                        '                \n' +
-                        '                <div class="col-sm-7 ">\n' +
-                        '                    <input type="text" id="childvisitor_bithdate" name="visitor[bithdate]" required="required" class="js-datepicker form-control" autocomplete="off" />\n' +
-                        '                </div>\n' +
-                        '            </div>\n' +
-                        '\n' +
-                        '            <div class="form-group">\n' +
-                        '                <label class="col-sm-3 control-label required" for="visitor_email">Adresse mail</label>\n' +
-                        '                \n' +
-                        '                <div class="col-sm-7">\n' +
-                        '                    <input type="email" id="visitor_email" name="visitor[email]" required="required" class="form-control" />\n' +
-                        '                </div>\n' +
-                        '            </div>\n' +
-                            ' <a href="#" id="remove">Supprimer</a>\n' +
-                        '        </div>\n' +
-                        '    </div>' +
-                        '</div>'
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Le Louvre{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
 
-                    //add row to the form
-                        $("#add").click(function (ajouter) {
-                        $("#formulaire").append(html)
-                    });
-                    //remove row to the form
-                        $("#formulaire") .on('click', '#remove', function (ajouter) {
-                            $(this).parent('div').remove();
-                            
-                        });
+            $(document).ready(function () {
+                var num = $('.fields').length;
+                if (num - 1 == 0)
+                    $('#btnDel').attr('disabled', 'disabled');
 
+                $('#btnAdd').click(function () {
 
+                    var num = $('.field').length;
+                    var newNum = num + 1;
+                    var newElem = $('#propriete-field-1').clone().attr('id', 'propriete-field-' + newNum);
 
-                })
-            </script>
+                    newElem.find('.line-item-property__last_name label').attr('for', 'last_name_' + newNum).val('');
+                    newElem.find('.line-item-property__last_name input').attr('id', 'last_name_' + newNum).attr('name', 'last_name[]').val('');
 
+                    newElem.find('.line-item-property__first_name label').attr('for', 'first_name_' + newNum).val('');
+                    newElem.find('.line-item-property__first_name input').attr('id', 'first_name_' + newNum).attr('name', 'first_name[]').val('');
 
-        {% endblock %}
-    </head>
-    <body class="wallpaper" >
+                    newElem.find('.line-item-property__country label').attr('for', 'country_' + newNum).val('');
+                    newElem.find('.line-item-property__country input').attr('id', 'country_' + newNum).attr('name', 'country[]').val('');
 
-        {% block body %}
+                    newElem.find('.line-item-property__bithdate label').attr('for', 'bithdate_' + newNum).val('');
+                    newElem.find('.line-item-property__bithdate input').attr('id', 'bithdate_' + newNum).attr('name', 'bithdate[]').val('');
 
-        {% endblock %}
-        {% block javascripts %}
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-            <script src="{{ asset('build/js/app.js') }}"></script>
-            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-            <script>
-                $(document).ready(function() {
+                    newElem.find('.line-item-property__email label').attr('for', 'email_' + newNum).val('');
+                    newElem.find('.line-item-property__email input').attr('id', 'email_' + newNum).attr('name', 'email[]').val('');
 
-                    $('.js-datepicker').datepicker({
-                        dateFormat: 'yy-mm-dd'
-                    });
+                    newElem.find('.line-item-property__name label').attr('for', 'name_' + newNum).val('');
+                    newElem.find('.line-item-property__name input').attr('id', 'name_' + newNum).attr('name', 'name[]').val('');
+
+                    newElem.find('.line-item-property__type label').attr('for', 'type_' + newNum).val('');
+                    newElem.find('.line-item-property__type input').attr('id', 'type_' + newNum).attr('name', 'type[]').val('');
+
+                    newElem.find('.line-item-property__price label').attr('for', 'price_' + newNum).val('');
+                    newElem.find('.line-item-property__price input').attr('id', 'price_' + newNum).attr('name', 'price[]').val('');
+
+                    newElem.find('.line-item-property__visit_date label').attr('for', 'visit_date_' + newNum).val('');
+                    newElem.find('.line-item-property__visit_date input').attr('id', 'visit_date_' + newNum).attr('name', 'visit_date[]').val('');
+
+                    newElem.find('.line-item-property__is_half label').attr('for', 'is_half_' + newNum).val('');
+                    newElem.find('.line-item-property__is_half input').attr('id', 'is_half_' + newNum).attr('name', 'is_half[]').val('');
+
+                    $('#propriete-field-' + num).after(newElem);
+                    $('#btnDel').attr('disabled', false);
+                    if (newNum == 19)
+                        $('#btnAdd').attr('disabled', 'disabled');
                 });
-                const tarifPrice = document.querySelector('#tarif_price');
-                const tarifName = document.querySelector('#tarif_name');
-                const tarifs = {
-                    Normal:16,
-                    Enfant:8,
-                    Senior:12,
-                    Gratuit:0
-                };
-                tarifPrice.value = tarifs[tarifName.value];
-                tarifName.addEventListener ('change', function () {
-                   tarifPrice.value = tarifs[tarifName.value];
-                })
 
+                $('#btnDel').click(function () {
+                    var num = $('.field').length;
+                    $('#propriete-field-' + num).remove();
+                    $('#btnAdd').attr('disabled', false);
+                    if (num - 1 == 1)
+                        $('#btnDel').attr('disabled', 'disabled');
+                });
+            });
+        </script>
+    {% endblock %}
+</head>
+<body class="wallpaper">
+{% block body %}
+{% endblock %}
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+            integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+            integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+            crossorigin="anonymous"></script>
+    <script src="{{ asset('build/js/app.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function () {
 
-
-
-            </script>
-
-
-
-
-
-        {% endblock %}
-    </body>
+            $('.js-datepicker').datepicker({
+                dateFormat: 'yy-mm-dd'
+            });
+        });
+        //  const tarifPrice = document.querySelector('#tarif_price');
+        // const tarifName = document.querySelector('#tarif_name');
+        // const tarifs = {
+        //   Normal: 16,
+        // Enfant: 8,
+        //Senior: 12,
+        //Gratuit: 0
+        //};
+        //tarifPrice.value = tarifs[tarifName.value];
+        //tarifName.addEventListener('change', function () {
+        //  tarifPrice.value = tarifs[tarifName.value];
+        //})
+    </script>
+{% endblock %}
+</body>
 </html>
