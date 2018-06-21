@@ -68,6 +68,8 @@
                     if (num - 1 == 1)
                         $('#btnDel').attr('disabled', 'disabled');
                 });
+
+
             });
         </script>
     {% endblock %}
@@ -94,20 +96,41 @@
             $('.js-datepicker').datepicker({
                 dateFormat: 'yy-mm-dd'
             });
+
+
         });
-        //  const tarifPrice = document.querySelector('#tarif_price');
-        // const tarifName = document.querySelector('#tarif_name');
-        // const tarifs = {
-        //   Normal: 16,
-        // Enfant: 8,
-        //Senior: 12,
-        //Gratuit: 0
-        //};
-        //tarifPrice.value = tarifs[tarifName.value];
-        //tarifName.addEventListener('change', function () {
-        //  tarifPrice.value = tarifs[tarifName.value];
-        //})
+
+        const billetType = document.querySelector('#billet_type');
+        const tarifPrice = document.querySelector('#tarif_price');
+        const tarifs = {
+            gratuit: 0,
+            enfant: 8,
+            normal: 16,
+            senior: 12
+
+        };
+        tarifPrice.value = tarifs[billetType.value];
+        billetType.addEventListener('change', function () {
+            tarifPrice.value = tarifs[billetType.value];
+        });
+
+
+
     </script>
 {% endblock %}
 </body>
 </html>
+
+
+const tarifPrice = document.querySelector('#tarif_price');
+const tarifName = document.querySelector('#tarif_name');
+const tarifs = {
+Normal:16,
+Enfant:8,
+Senior:12,
+Gratuit:0
+};
+tarifPrice.value = tarifs[tarifName.value];
+tarifName.addEventListener ('change', function () {
+tarifPrice.value = tarifs[tarifName.value];
+})
