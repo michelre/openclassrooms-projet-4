@@ -13,45 +13,33 @@
         <link rel="stylesheet" href="/resources/demos/style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
-
             $(document).ready(function () {
                 var num = $('.fields').length;
                 if (num - 1 == 0)
                     $('#btnDel').attr('disabled', 'disabled');
-
                 $('#btnAdd').click(function () {
-
                     var num = $('.field').length;
                     var newNum = num + 1;
                     var newElem = $('#propriete-field-1').clone().attr('id', 'propriete-field-' + newNum);
 
                     newElem.find('.line-item-property__last_name label').attr('for', 'last_name_' + newNum).val('');
                     newElem.find('.line-item-property__last_name input').attr('id', 'last_name_' + newNum).attr('name', 'last_name[]').val('');
-
                     newElem.find('.line-item-property__first_name label').attr('for', 'first_name_' + newNum).val('');
                     newElem.find('.line-item-property__first_name input').attr('id', 'first_name_' + newNum).attr('name', 'first_name[]').val('');
-
                     newElem.find('.line-item-property__country label').attr('for', 'country_' + newNum).val('');
                     newElem.find('.line-item-property__country input').attr('id', 'country_' + newNum).attr('name', 'country[]').val('');
-
                     newElem.find('.line-item-property__bithdate label').attr('for', 'bithdate_' + newNum).val('');
                     newElem.find('.line-item-property__bithdate input').attr('id', 'bithdate_' + newNum).attr('name', 'bithdate[]').val('');
-
                     newElem.find('.line-item-property__email label').attr('for', 'email_' + newNum).val('');
                     newElem.find('.line-item-property__email input').attr('id', 'email_' + newNum).attr('name', 'email[]').val('');
-
                     newElem.find('.line-item-property__name label').attr('for', 'name_' + newNum).val('');
                     newElem.find('.line-item-property__name input').attr('id', 'name_' + newNum).attr('name', 'name[]').val('');
-
                     newElem.find('.line-item-property__type label').attr('for', 'type_' + newNum).val('');
                     newElem.find('.line-item-property__type input').attr('id', 'type_' + newNum).attr('name', 'type[]').val('');
-
                     newElem.find('.line-item-property__price label').attr('for', 'price_' + newNum).val('');
                     newElem.find('.line-item-property__price input').attr('id', 'price_' + newNum).attr('name', 'price[]').val('');
-
                     newElem.find('.line-item-property__visit_date label').attr('for', 'visit_date_' + newNum).val('');
                     newElem.find('.line-item-property__visit_date input').attr('id', 'visit_date_' + newNum).attr('name', 'visit_date[]').val('');
-
                     newElem.find('.line-item-property__is_half label').attr('for', 'is_half_' + newNum).val('');
                     newElem.find('.line-item-property__is_half input').attr('id', 'is_half_' + newNum).attr('name', 'is_half[]').val('');
 
@@ -68,9 +56,53 @@
                     if (num - 1 == 1)
                         $('#btnDel').attr('disabled', 'disabled');
                 });
-
-
             });
+
+            function CalculAge() {
+                var today = new Date();
+                var dtn = document.getElementById('visitor_bithdate').value; // on lit la date de naissance
+                var an = dtn.substr(6, 4); // l'année (les quatre premiers caractères de la chaîne à partir de 6)
+                var mois = dtn.substr(3, 2);// On selectionne le mois de la date de naissance
+                var day = dtn.substr(0, 2); // On selectionne la jour de la date de naissance
+                var dateNaissance = new Date(an + "-" + mois + "-" + day);
+                var age = today.getFullYear() - dateNaissance.getFullYear();
+                var m = today.getMonth() - dateNaissance.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < dateNaissance.getDate())) {
+                    age = age - 1;
+                }
+                if (age <= 0 && age < 4) {
+                    document.getElementById('billet_type').value = 'gratuit';
+                    {
+                        if (document.getElementById('billet_type').value = 'gratuit') {
+                            document.getElementById('tarif_price').value = '0';
+                        }
+                    }
+                }
+                if (age >= 5 && age < 12) {
+                    document.getElementById('billet_type').value = 'enfant';
+                    {
+                        if (document.getElementById('billet_type').value = 'enfant') {
+                            document.getElementById('tarif_price').value = '8';
+                        }
+                    }
+                }
+                if (age >= 12 && age < 60) {
+                    document.getElementById('billet_type').value = 'normal';
+                    {
+                        if (document.getElementById('billet_type').value = 'normal') {
+                            document.getElementById('tarif_price').value = '16';
+                        }
+                    }
+                }
+                if (age >= 60 && age < 200) {
+                    document.getElementById('billet_type').value = 'senior';
+                    {
+                        if (document.getElementById('billet_type').value = 'senior') {
+                            document.getElementById('tarif_price').value = '12';
+                        }
+                    }
+                }
+            }
         </script>
     {% endblock %}
 </head>
@@ -91,29 +123,22 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
+
+        //calendrier datepicker
         $(document).ready(function () {
 
-            $('.js-datepicker').datepicker({
-                dateFormat: 'yy-mm-dd'
+            $('.js-datepicker1').datepicker({
+                maxDate: +0,
+                dateFormat: 'dd-mm-yy'
+            });
+
+            $('.js-datepicker2').datepicker({
+                minDate: -0,
+                dateFormat: 'dd-mm-yy'
             });
 
 
         });
-
-        const billetType = document.querySelector('#billet_type');
-        const tarifPrice = document.querySelector('#tarif_price');
-        const tarifs = {
-            gratuit: 0,
-            enfant: 8,
-            normal: 16,
-            senior: 12
-
-        };
-        tarifPrice.value = tarifs[billetType.value];
-        billetType.addEventListener('change', function () {
-            tarifPrice.value = tarifs[billetType.value];
-        });
-
 
 
     </script>

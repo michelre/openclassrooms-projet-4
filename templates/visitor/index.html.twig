@@ -246,7 +246,7 @@
                     <div class="line-item-property__bithdate form-group  mb-3 ml-3 mr-3">
                         <label class="col-sm-3 control-label required" for="visitor_bithdate">Date de naissance</label>
                         <input type="text" id="visitor_bithdate" name="bithdate[]" required="required"
-                               class="js-datepicker form-control" autocomplete="off"/>
+                               class="js-datepicker1 form-control" autocomplete="off" Onblur="CalculAge()"/>
                     </div>
                     <div class="line-item-property__name form-group  mb-3 ml-3 mr-3">
                         <label class="col-sm-3 control-label required" for="tarif_name">Type de billet</label>
@@ -261,14 +261,9 @@
                                class="form-control"/>
                     </div>
                     <div class="line-item-property__type form-group  mb-3 ml-3 mr-3">
-                        <label class="col-sm-5 control-label required" for="billet_type">Vous bénéficiez du
-                            tarif</label>
-                        <select id="billet_type" type="text" name="type[]" required="required" class="form-control">
-                            <option value="gratuit">gratuit (moins de 4 ans)</option>
-                            <option value="enfant">enfant (de 4 à 12 ans)</option>
-                            <option value="normal">normal (à partie de 12 ans)</option>
-                            <option value="senior">senior (à partir de 60 ans)</option>
-                        </select>
+                        <label class="col-sm-5 control-label required" for="billet_type">Vous bénéficiez du tarif</label>
+                        <input type="text" id="billet_type" name="type[]" required="required" value=""
+                               class="form-control disabled-input"/>
                     </div>
                     <div class="line-item-property__price form-group  mb-3 ml-3 mr-3">
                         <label class="col-sm-3 control-label required" for="tarif_price">Votre tarif</label>
@@ -279,7 +274,7 @@
                         <label class="col-sm-3 control-label required" for="billet_visit_date">Votre date de
                             visite</label>
                         <input type="text" id="visitor_billet_date" name="visit_date[]" required="required"
-                               class="js-datepicker form-control" autocomplete="off"/>
+                               class="js-datepicker2 form-control" autocomplete="off"/>
                     </div>
                     <div class="line-item-property__is_half form-group  mb-3 ml-3 mr-3">
                         <label class="col-sm-12 control-label required" for="billet_is_half">Tarif réduit (Il sera
