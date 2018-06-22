@@ -56,21 +56,23 @@
                     if (num - 1 == 1)
                         $('#btnDel').attr('disabled', 'disabled');
                 });
+
+
             });
 
             function CalculAge() {
                 var today = new Date();
-                var dtn = document.getElementById('visitor_bithdate').value; // on lit la date de naissance
-                var an = dtn.substr(6, 4); // l'année (les quatre premiers caractères de la chaîne à partir de 6)
-                var mois = dtn.substr(3, 2);// On selectionne le mois de la date de naissance
-                var day = dtn.substr(0, 2); // On selectionne la jour de la date de naissance
+                var dtn = document.getElementById('visitor_bithdate').value;
+                var an = dtn.substr(6, 4);
+                var mois = dtn.substr(3, 2);
+                var day = dtn.substr(0, 2);
                 var dateNaissance = new Date(an + "-" + mois + "-" + day);
                 var age = today.getFullYear() - dateNaissance.getFullYear();
                 var m = today.getMonth() - dateNaissance.getMonth();
                 if (m < 0 || (m === 0 && today.getDate() < dateNaissance.getDate())) {
                     age = age - 1;
                 }
-                if (age <= 0 && age < 4) {
+                if (age >= 0 && age < 4) {
                     document.getElementById('billet_type').value = 'gratuit';
                     {
                         if (document.getElementById('billet_type').value = 'gratuit') {
@@ -103,6 +105,8 @@
                     }
                 }
             }
+
+
         </script>
     {% endblock %}
 </head>
@@ -130,17 +134,20 @@
             $('.js-datepicker1').datepicker({
                 maxDate: +0,
                 dateFormat: 'dd-mm-yy'
+
+
             });
+
 
             $('.js-datepicker2').datepicker({
                 minDate: -0,
-                dateFormat: 'dd-mm-yy'
+                dateFormat: 'dd-mm-yy',
+                beforeShowDay: function (date) {
+                    var day = date.getDay();
+                    return [(day != 2)];
+                }
             });
-
-
         });
-
-
     </script>
 {% endblock %}
 </body>

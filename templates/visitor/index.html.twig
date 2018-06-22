@@ -25,6 +25,11 @@
                         <input id="first_name" type="text" name="first_name[]" required="required"
                                class="form-control">
                     </div>
+                    <div class="line-item-property__bithdate form-group  mb-3 ml-3 mr-3">
+                        <label class="col-sm-3 control-label required" for="visitor_bithdate">Date de naissance</label>
+                        <input type="text" id="visitor_bithdate" name="bithdate[]" required="required"
+                               class="js-datepicker1 form-control" autocomplete="off" Onblur="CalculAge()"/>
+                    </div>
                     <div class="line-item-property__country form-group  mb-3 ml-3 mr-3">
                         <label class="col-sm-3 control-label required" for="visitor_country">pays</label>
                         <div class="">
@@ -243,25 +248,20 @@
                             </select>
                         </div>
                     </div>
-                    <div class="line-item-property__bithdate form-group  mb-3 ml-3 mr-3">
-                        <label class="col-sm-3 control-label required" for="visitor_bithdate">Date de naissance</label>
-                        <input type="text" id="visitor_bithdate" name="bithdate[]" required="required"
-                               class="js-datepicker1 form-control" autocomplete="off" Onblur="CalculAge()"/>
+                    <div class="line-item-property__visit_date form-group  mb-3 ml-3 mr-3">
+                        <label class="col-sm-3 control-label required" for="billet_visit_date">Votre date de
+                            visite</label>
+                        <input type="text" id="visitor_billet_date" name="visit_date[]" required="required"
+                               class="js-datepicker2 form-control" autocomplete="off"/>
                     </div>
                     <div class="line-item-property__name form-group  mb-3 ml-3 mr-3">
                         <label class="col-sm-3 control-label required" for="tarif_name">Type de billet</label>
-                        <select id="tarif_name" type="text" name="name[]" required="required" class="form-control">
-                            <option value="journée">journée</option>
-                            <option value="demiJournée">demi-journée</option>
-                        </select>
-                    </div>
-                    <div class="line-item-property__email form-group  mb-3 ml-3 mr-3">
-                        <label class="col-sm-3 control-label required" for="visitor_email">Adresse mail</label>
-                        <input type="email" id="visitor_email" name="email[]" required="required"
-                               class="form-control"/>
+                        <input type="text" id="tarif_name" name="name[]" required="required" value=""
+                               class="form-control disabled-input"/>
                     </div>
                     <div class="line-item-property__type form-group  mb-3 ml-3 mr-3">
-                        <label class="col-sm-5 control-label required" for="billet_type">Vous bénéficiez du tarif</label>
+                        <label class="col-sm-5 control-label required" for="billet_type">Vous bénéficiez du
+                            tarif</label>
                         <input type="text" id="billet_type" name="type[]" required="required" value=""
                                class="form-control disabled-input"/>
                     </div>
@@ -270,11 +270,10 @@
                         <input type="text" id="tarif_price" name="price[]" required="required" value=""
                                class="form-control disabled-input"/>
                     </div>
-                    <div class="line-item-property__visit_date form-group  mb-3 ml-3 mr-3">
-                        <label class="col-sm-3 control-label required" for="billet_visit_date">Votre date de
-                            visite</label>
-                        <input type="text" id="visitor_billet_date" name="visit_date[]" required="required"
-                               class="js-datepicker2 form-control" autocomplete="off"/>
+                    <div class="line-item-property__email form-group  mb-3 ml-3 mr-3">
+                        <label class="col-sm-3 control-label required" for="visitor_email">Adresse mail</label>
+                        <input type="email" id="visitor_email" name="email[]" required="required"
+                               class="form-control"/>
                     </div>
                     <div class="line-item-property__is_half form-group  mb-3 ml-3 mr-3">
                         <label class="col-sm-12 control-label required" for="billet_is_half">Tarif réduit (Il sera
