@@ -4,7 +4,9 @@
 
 {% block body %}
   <nav class="navbar navbar-expand-lg navbar-light bg-info ">
-    <div class="navbar-brand text-white"><h3>Bienvenue au musée du Louvre</h3></div>
+    <div class="navbar-brand text-white"><h3>Bienvenue au musée du Louvre</h3>
+    <div class="currentTime"></div>
+    </div>
   </nav>
   <div class="container mt-5 p-3">
     <div class="container-info text-center">
@@ -39,30 +41,28 @@
         </div>
         <div class="line-item-property__bithdate form-group  mb-3 ml-3 mr-3">
           <label class="control-label required" for="visitor_bithdate">Date de naissance</label>
-          <input type="text" name="bithdate[]" class="js-datepicker1 form-control" autocomplete="off" id="visitor_bithdate"/>
+          <input type="text" name="bithdate[]" class="form-control" autocomplete="off" id="visitor_bithdate" />
         </div>
-        <div class="line-item-property__name form-group  mb-3 ml-3 mr-3">
+        <div class="line-item-property__type form-group  mb-3 ml-3 mr-3">
           <label class="control-label required">Type de billet</label>
-          <select type="text" name="name[]" class="form-control">
-            <option value="journée">journée</option>
-            <option value="demiJournée">demi-journée</option>
-          </select>
+          <input type="text" name="type[]" class="form-control disabled-input" id="billet_type"/>
+
         </div>
         <div class="line-item-property__email form-group  mb-3 ml-3 mr-3">
           <label class="control-label required">Adresse mail</label>
           <input id="email" type="email" name="email[]" class="form-control"/>
         </div>
-        <div class="line-item-property__type form-group  mb-3 ml-3 mr-3">
+        <div class="line-item-property__name form-group  mb-3 ml-3 mr-3">
           <label class="control-label required">Vous bénéficiez du tarif</label>
-          <input type="text" name="type[]" value="" class="form-control disabled-input" id="billet_type"/>
+          <input type="text" name="name[]" value="" class="form-control disabled-input" id="tarif_name"/>
         </div>
         <div class="line-item-property__price form-group  mb-3 ml-3 mr-3">
           <label class="control-label required">Votre tarif</label>
           <input type="text" name="price[]" value="" class="form-control disabled-input" id="tarif_price"/>
         </div>
-        <div class="line-item-property__visit_date form-group mb-3 ml-3 mr-3">
-          <label class="control-label required">Votre date de visite</label>
-          <input id="visit_date" type="text" name="visit_date[]" class="js-datepicker2 form-control" autocomplete="off"/>
+        <div class="line-item-property__visit_date form-group  mb-3 ml-3 mr-3">
+          <label class="control-label required" for="billet_visit_date">Date de naissance</label>
+          <input type="text" name="visit_date[]" class="form-control" autocomplete="off" id="billet_visit_date" />
         </div>
         <div class="line-item-property__is_half form-group  mb-3 ml-3 mr-3">
           <label class="control-label required">Tarif réduit (Il sera
