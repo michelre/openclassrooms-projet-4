@@ -2,16 +2,16 @@ import $ from 'jquery';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
 import 'bootstrap-datepicker';
 
-const initDatePicker = () => {
+const initDatePicker = (billetVisitDate , visitorBirthdate) => {
 
-    $('#billet_visit_date').datepicker({
+    billetVisitDate.datepicker({
         startDate: new Date(),
         format: 'dd-mm-yyyy',
         daysOfWeekDisabled: [2],
         language: 'fr-FR',
     });
 
-    $('#visitor_bithdate').datepicker({endDate: new Date(), format: 'dd-mm-yyyy', language: 'fr-FR'});
+    visitorBirthdate.datepicker({endDate: new Date(), format: 'dd-mm-yyyy', language: 'fr-FR'});
 };
 
 
@@ -40,6 +40,7 @@ const duplicateFields = () => {
 
     const newFields = $(getLastField()).clone();
     const nbFields = getNbFields();
+    console.log('#billet_visit_date-'+(nbFields+1), '#visitor_bithdate-'+(nbFields+1))
     newFields.find('input').each(function () {
         let currentId = $(this).attr('id');
         currentId = currentId ? currentId.split('-')[0] : currentId
@@ -74,25 +75,26 @@ const setTarifPrice = (age) => {
     }
 };
 
-const displayCurrentTime = () => {
+const getBilletType = (billetType) => {
+
     const myDate = new Date();
     const hours = myDate.getHours();
 
     if (0 <= hours && hours <= 13)
     {
-        $('#billet_type').val('journée');
+        billetType.val('journée');
     }
     else
     {
-        $('#billet_type').val('demi-journée');
-    }
+        billetType.val('demi-journée');}
+
 
 };
 
 
 $(document).ready(function () {
-    displayCurrentTime();
-    initDatePicker();
+    getBilletType($('#billet_type'));
+    initDatePicker($('#billet_visit_date'), $('#visitor_bithdate'));
 
     $('#btnDel').attr('disabled', 'disabled');
     setVisitorTitles();
@@ -101,6 +103,8 @@ $(document).ready(function () {
         const newElem = duplicateFields();
         emptyFields(newElem);
         $(getLastField()).append(newElem);
+        initDatePicker($('#billet_visit_date-'+(getNbFields())), $('#visitor_bithdate-'+(getNbFields())));
+        getBilletType($('#billet_type-'+(getNbFields())));
         if (getNbFields() > 1) {
             $('#btnDel').attr('disabled', null);
         }
