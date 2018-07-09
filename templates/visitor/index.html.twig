@@ -13,22 +13,22 @@
       <div>Merci de renseigner votre identité</div>
       <hr/>
     </div>
-    <form method="post" action="{{ path('validateVisitor') }}">
+    <form id="resaForm" method="post" action="{{ path('validateVisitor') }}">
       <div class="fields mt-3 ">
 
         <h3 class="title-visitor">Visiteur </h3>
         <div class=" line-item-property__last_name form-group  mb-3 ml-3 mr-3">
           <label class="control-label required" for="last_name">Nom</label>
-          <input id="last_name" type="text" name="last_name[]" class="form-control">
+          <input id="last_name" type="text" name="visitor[0][last_name]" class="form-control" data-type="visitor">
         </div>
         <div class=" line-item-property__first_name form-group  mb-3 ml-3 mr-3">
           <label class="control-label required" for="first_name">Prénom</label>
-          <input id="first_name" type="text" name="first_name[]" class="form-control">
+          <input id="first_name" type="text" name="visitor[0][first_name]" class="form-control" data-type="visitor">
         </div>
         <div class="line-item-property__country form-group  mb-3 ml-3 mr-3">
           <label class="control-label required" for="visitor_country">pays</label>
           <div class="">
-            <select id="visitor_country" type="text" name="country[]" class="form-control">
+            <select id="visitor_country" type="text" name="country[]" class="form-control" data-type="visitor">
               <option value="france">France</option>
               <option value="allemagne">Allemagne</option>
               <option value="espagne">Espagne</option>
@@ -40,11 +40,11 @@
         </div>
         <div class="line-item-property__bithdate form-group  mb-3 ml-3 mr-3">
           <label class="control-label required" for="visitor_bithdate">Date de naissance</label>
-          <input type="text" name="bithdate[]" class="form-control" autocomplete="off" id="visitor_bithdate" />
+          <input type="text" name="bithdate[]" class="form-control" autocomplete="off" id="visitor_bithdate" data-type="visitor"/>
         </div>
         <div class="line-item-property__type form-group  mb-3 ml-3 mr-3">
           <label class="control-label required">Type de billet</label>
-          <input type="text" name="type[]" class="form-control disabled-input" id="billet_type"/>
+          <input type="text" name="type[]" class="form-control disabled-input" id="billet_type" data-type="billet"/>
 
         </div>
         <div class="line-item-property__email form-group  mb-3 ml-3 mr-3">
