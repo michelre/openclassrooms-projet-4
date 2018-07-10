@@ -37,14 +37,13 @@ const setVisitorTitles = () => {
 
 const duplicateFields = () => {
 
-  const newFields = $(getLastField()).clone();
-  const nbFields = getNbFields();
-  newFields.find('input').each(function () {
-    let currentId = $(this).attr('id');
-    currentId = currentId ? currentId.split('-')[0] : currentId
-    let type = $(this).data('type');
-    $(this).attr('id', `${currentId}-${nbFields + 1}`);
-    $(this).attr('name', `${type}[${nbFields}][${currentId}]`)
+    const newFields = $(getLastField()).clone();
+    const nbFields = getNbFields();
+
+    newFields.find('input').each(function () {
+        let currentId = $(this).attr('id');
+        currentId = currentId ? currentId.split('-')[0] : currentId
+    let type = $(this).data('type');    $(this).attr('id', `${currentId}-${nbFields + 1}`);$(this).attr('name', `${type}[${nbFields}][${currentId}]`)
 
   });
   return newFields;
@@ -80,12 +79,15 @@ const getBilletType = (billetType) => {
   const myDate = new Date();
   const hours = myDate.getHours();
 
-  if (0 <= hours && hours <= 13) {
-    billetType.val('journée');
-  }
-  else {
-    billetType.val('demi-journée');
-  }
+    if (0 <= hours && hours <= 13){
+
+        billetType.val('journée');
+    }
+    else{
+
+        billetType.val('demi-journée');
+
+}
 };
 
 
