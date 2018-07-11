@@ -32,9 +32,11 @@ class ReservationController extends Controller
      */
     public function validateForm(request $request)
     {
+
         $em = $this->getDoctrine()->getManager();
         $formFields = $request->request->all();
         foreach ($formFields['visitor'] as $visitorData) {
+            var_dump($formFields['']);
             $visitor = new Visitor();
             $visitor
                 ->setLastName($visitorData['last_name'])
@@ -44,6 +46,21 @@ class ReservationController extends Controller
                 ->setEmail($visitorData['email']);
             var_dump($visitor);
         }
+        /*foreach (array_keys($formFields) as $key) {
+           //print_r($formFields[$key]);
+           foreach ($formFields[$key] as $fieldValue){
+               var_dump($fieldValue);
+           }
+           //var_dump($key, $formFields[$key]);
+       }*/
+
+
+
+        //foreach (array_keys($formFields) as $key) {
+
+
+        //var_dump($formFields[$key], $key);
+        //}
         foreach ($formFields['billet'] as $billetData) {
             $billet = new Billet();
             $billet
