@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Type;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TarifRepository")
@@ -18,27 +19,15 @@ class Tarif
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Type("string")
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
+     * @Type("integer")
      */
     private $price;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Billet", inversedBy="tarif", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $billet;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Reservation", mappedBy="tarif", cascade={"persist", "remove"})
-     */
-    private $reservation;
-
-
-
 
 
 
@@ -68,35 +57,6 @@ class Tarif
     public function setPrice(int $price): self
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    public function getBillet(): ?Billet
-    {
-        return $this->billet;
-    }
-
-    public function setBillet(Billet $billet): self
-    {
-        $this->billet = $billet;
-
-        return $this;
-    }
-
-    public function getReservation(): ?Reservation
-    {
-        return $this->reservation;
-    }
-
-    public function setReservation(Reservation $reservation): self
-    {
-        $this->reservation = $reservation;
-
-        // set the owning side of the relation if necessary
-        if ($this !== $reservation->getTarif()) {
-            $reservation->setTarif($this);
-        }
 
         return $this;
     }

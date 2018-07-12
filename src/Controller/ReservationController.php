@@ -2,11 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Billet;
-use App\Entity\Tarif;
-use App\Entity\Visitor;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use App\Entity\Reservation;
+use JMS\Serializer\SerializerBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,60 +26,29 @@ class ReservationController extends Controller
     }
 
     /**
-     * @Route("/reservation/add", name="validateVisitor")
+     * @Route("/api/reservation", name="validateVisitor")
      * @Method({"POST"})
      */
     public function validateForm(request $request)
     {
 
         $em = $this->getDoctrine()->getManager();
-        $formFields = $request->request->all();
-        foreach ($formFields['visitor'] as $visitorData) {
-            var_dump($formFields['']);
-            $visitor = new Visitor();
-            $visitor
-                ->setLastName($visitorData['last_name'])
-                ->setFirstName($visitorData['first_name'])
-                ->setCountry($visitorData['country'])
-                ->setBithdate($visitorData['bithdate'])
-                ->setEmail($visitorData['email']);
-            var_dump($visitor);
+
+        $formFields = $request->getContent();
+        $serializer = SerializerBuilder::create()->build();
+        $visitors = $serializer->deserialize($formFields, 'array<App\Entity\Visitor>', 'json');
+
+        $reservation = new Reservation();
+        $reservation->setCode('ABCD');
+        $reservation->setCreationDate(new \DateTime());
+
+        foreach ($visitors as $visitor) {
+            $reservation->addVisitor($visitor);
         }
-        /*foreach (array_keys($formFields) as $key) {
-           //print_r($formFields[$key]);
-           foreach ($formFields[$key] as $fieldValue){
-               var_dump($fieldValue);
-           }
-           //var_dump($key, $formFields[$key]);
-       }*/
 
-
-
-        //foreach (array_keys($formFields) as $key) {
-
-
-        //var_dump($formFields[$key], $key);
-        //}
-        foreach ($formFields['billet'] as $billetData) {
-            $billet = new Billet();
-            $billet
-                ->setType($billetData['type'])
-                ->setVisitDate($billetData['visite_date'])
-                ->setIsHalf($billetData['is_half']);
-            var_dump($billet);
-        }
-        foreach ($formFields['tarif'] as $tarifData) {
-            $tarif = new Tarif();
-            $tarif
-                ->setPrice($tarifData['price'])
-                ->setName($tarifData['name']);
-            var_dump($tarif);
-        }
-        $em->persist($visitor);
-        $em->persist($billet);
-        $em->persist($tarif);
+        $em->persist($reservation);
         $em->flush();
 
-        return new Response();
+        return new Response(json_encode(array("status" => "OK", "reservation_code" => $reservation->getCode())));
     }
 }

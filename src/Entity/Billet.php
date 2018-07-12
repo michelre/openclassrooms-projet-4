@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Type;
 
 
 /**
@@ -19,36 +20,27 @@ class Billet
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Type("string")
      */
     private $type;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Type("DateTime")
      */
     private $visit_date;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Type("boolean")
      */
     private $is_half;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Visitor", inversedBy="billet", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string")
+     * @Type("string")
      */
-    private $visitor;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Tarif", mappedBy="billet", cascade={"persist", "remove"})
-     */
-    private $tarif;
-
-   
-
-
-
-
-
+    private $tarif_id;
 
 
 
@@ -90,18 +82,6 @@ class Billet
     public function setIsHalf(bool $is_half): self
     {
         $this->is_half = $is_half;
-
-        return $this;
-    }
-
-    public function getVisitor(): ?Visitor
-    {
-        return $this->visitor;
-    }
-
-    public function setVisitor(Visitor $visitor): self
-    {
-        $this->visitor = $visitor;
 
         return $this;
     }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Type;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VisitorRepository")
@@ -18,34 +19,45 @@ class Visitor
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Type("string")
      */
     private $last_name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Type("string")
      */
     private $first_name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Type("string")
      */
     private $country;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Type("DateTime")
      */
-    private $bithdate;
+    private $birthdate;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Type("string")
      */
     private $email;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Billet", mappedBy="visitor", cascade={"persist", "remove"})
+     * @Type("App\Entity\Billet")
      */
     private $billet;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Reservation", inversedBy="Visitors")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $reservation;
 
 
  
@@ -131,6 +143,17 @@ class Visitor
         return $this;
     }
 
+    public function getReservation(): ?Reservation
+    {
+        return $this->reservation;
+    }
+
+    public function setReservation(?Reservation $reservation): self
+    {
+        $this->reservation = $reservation;
+
+        return $this;
+    }
 
     
 }

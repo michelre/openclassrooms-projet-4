@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\Expr\Array_;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReservationRepository")
@@ -27,15 +30,15 @@ class Reservation
     private $code;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Tarif", inversedBy="reservation", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="App\Entity\Visitor", mappedBy="reservation", cascade={"persist", "remove"})
      */
-    private $tarif;
+    private $visitors;
 
 
-
-
-
+    public function __construct()
+    {
+        $this->visitors = new ArrayCollection();
+    }
 
 
 
@@ -68,14 +71,33 @@ class Reservation
         return $this;
     }
 
-    public function getTarif(): ?Tarif
+    /**
+     * @return Collection|Visitor[]
+     */
+    public function getVisitors(): Collection
     {
-        return $this->tarif;
+        return $this->visitors;
     }
 
-    public function setTarif(Tarif $tarif): self
+    public function addVisitor(Visitor $visitor): self
     {
-        $this->tarif = $tarif;
+        if (!$this->visitors->contains($visitor)) {
+            $this->visitors[] = $visitor;
+            $visitor->setReservation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVisitor(Visitor $visitor): self
+    {
+        if ($this->visitors->contains($visitor)) {
+            $this->visitors->removeElement($visitor);
+            // set the owning side to null (unless already changed)
+            if ($visitor->getReservation() === $this) {
+                $visitor->setReservation(null);
+            }
+        }
 
         return $this;
     }
