@@ -1,4 +1,7 @@
 {
+    "ajaxray/short-code": {
+        "version": "v1.1.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -139,6 +142,9 @@
             "version": "4.0",
             "ref": "aaddfdf43cdecd4cf91f992052d76c2cadc04543"
         }
+    },
+    "stripe/stripe-php": {
+        "version": "v6.15.0"
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.0.2"

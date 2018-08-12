@@ -1,9 +1,10 @@
 @import "~bootstrap/scss/bootstrap";
+@import "~@fortawesome/fontawesome-free/css/all.css";
 @import "~bootstrap-datepicker/dist/css/bootstrap-datepicker3.css";
 
 $color_head: #fff;
 
-body{
+body {
   background: #B0413E;
   height: 100%;
   width: 100%;
@@ -11,15 +12,15 @@ body{
   font-weight: 500;
 }
 
-.global-container{
-  background:white;
+.global-container {
+  background: white;
   width: 30%;
   margin: 15%;
   margin-left: 35%;
 }
 
 .container {
-  background:white !important;
+  background: white !important;
   max-width: 700px !important;
 }
 
@@ -39,11 +40,28 @@ body{
   text-align: center;
 }
 
-.container-info{
+.container-info {
 
 }
 
-.disabled-input{
+.disabled-input {
   background: #c3c3c3 !important;
   pointer-events: none !important;
+}
+
+.font-small {
+  font-size: 0.8rem;
+}
+
+.captialize {
+  text-transform: capitalize;
+}
+
+.tarif {
+  padding: 10px;
+  margin: 0;
+  min-height: 50px;
+  border: 1px solid black;
+
+
 }

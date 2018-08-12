@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Type;
 
@@ -14,6 +16,7 @@ class Tarif
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Type("integer")
      */
     private $id;
 
@@ -29,7 +32,9 @@ class Tarif
      */
     private $price;
 
-
+    public function __construct()
+    {
+    }
 
 
     public function getId()
