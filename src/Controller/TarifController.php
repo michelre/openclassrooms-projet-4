@@ -1,16 +1,29 @@
 <?php
 
 namespace App\Controller;
-
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use App\Entity\Billet;
 use App\Entity\Tarif;
 use App\Form\TarifType;
-Use App\Entity\Billet;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use JMS\Serializer\SerializerBuilder;
+use Symfony\Component\HttpFoundation\Response;
 
 class TarifController extends Controller
 {
+
+    /**
+     * @Route("/api/tarifs", name="tarifs")
+     */
+    public function getTarifs()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $tarifs = $this->getDoctrine()->getRepository(Tarif::class)->findAll();
+        $serializer = SerializerBuilder::create()->build();
+        return new Response($serializer->serialize($tarifs, 'json'));
+    }
+
     /**
      * @Route("/tarif/{billetId}", name="tarif")
      */

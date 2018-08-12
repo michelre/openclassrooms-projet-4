@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 
 /**
@@ -20,14 +23,9 @@ class Visitor
     /**
      * @ORM\Column(type="string", length=255)
      * @Type("string")
+     * @SerializedName("fullName")
      */
-    private $last_name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Type("string")
-     */
-    private $first_name;
+    private $fullName;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -37,58 +35,49 @@ class Visitor
 
     /**
      * @ORM\Column(type="datetime")
-     * @Type("DateTime")
+     * @Type("DateTime<'Y-m-d'>")
      */
     private $birthdate;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Type("string")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Reservation", mappedBy="visitors")
      */
-    private $email;
+    private $reservations;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Billet", mappedBy="visitor", cascade={"persist", "remove"})
-     * @Type("App\Entity\Billet")
-     */
-    private $billet;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Reservation", inversedBy="Visitors")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Tarif", inversedBy="visitors")
      * @ORM\JoinColumn(nullable=false)
+     * @Type("App\Entity\Tarif")
      */
-    private $reservation;
+    private $tarif;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
 
 
- 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getLastName(): ?string
+    /**
+     * @return mixed
+     */
+    public function getFullName()
     {
-        return $this->last_name;
+        return $this->fullName;
     }
 
-    public function setLastName(string $last_name): self
+    /**
+     * @param mixed $fullName
+     */
+    public function setFullName($fullName)
     {
-        $this->last_name = $last_name;
-
-        return $this;
+        $this->fullName = $fullName;
     }
 
-    public function getFirstName(): ?string
-    {
-        return $this->first_name;
-    }
-
-    public function setFirstName(string $first_name): self
-    {
-        $this->first_name = $first_name;
-
-        return $this;
-    }
 
     public function getCountry(): ?string
     {
@@ -114,46 +103,45 @@ class Visitor
         return $this;
     }
 
-    public function getEmail(): ?string
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
     {
-        return $this->email;
+        return $this->reservations;
     }
 
-    public function setEmail(string $email): self
+    public function addReservation(Reservation $reservation): self
     {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getBillet(): ?Billet
-    {
-        return $this->billet;
-    }
-
-    public function setBillet(Billet $billet): self
-    {
-        $this->billet = $billet;
-
-        // set the owning side of the relation if necessary
-        if ($this !== $billet->getVisitor()) {
-            $billet->setVisitor($this);
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->addVisitor($this);
         }
 
         return $this;
     }
 
-    public function getReservation(): ?Reservation
+    public function removeReservation(Reservation $reservation): self
     {
-        return $this->reservation;
-    }
-
-    public function setReservation(?Reservation $reservation): self
-    {
-        $this->reservation = $reservation;
+        if ($this->reservations->contains($reservation)) {
+            $this->reservations->removeElement($reservation);
+            $reservation->removeVisitor($this);
+        }
 
         return $this;
     }
 
-    
+    public function getTarif(): ?Tarif
+    {
+        return $this->tarif;
+    }
+
+    public function setTarif(?Tarif $tarif): self
+    {
+        $this->tarif = $tarif;
+
+        return $this;
+    }
+
+
 }

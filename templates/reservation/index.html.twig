@@ -3,90 +3,26 @@
 {% block title %}Infos personnelles{% endblock %}
 
 {% block body %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-info ">
-        <div class="navbar-brand text-white"><h3>Bienvenue au musée du Louvre</h3>
-        </div>
-    </nav>
-    <div class="container mt-5 p-3">
-        <div class="container-info text-center">
-            <div>Vous souhaitez acheter votre billet en ligne</div>
-            <div>Merci de renseigner votre identité</div>
-            <hr/>
-        </div>
-        <form id="resaForm" method="post" action="{{ path('validateVisitor') }}">
-            <div class="fields mt-3 ">
-
-                <h3 class="title-visitor">Visiteur </h3>
-                <div class=" line-item-property__last_name form-group  mb-3 ml-3 mr-3">
-                    <label class="control-label required" for="last_name">Nom</label>
-                    <input id="last_name" type="text" name="visitor[0][last_name]" class="form-control" data-type="visitor">
-                </div>
-                <div class=" line-item-property__first_name form-group  mb-3 ml-3 mr-3">
-                    <label class="control-label required" for="first_name">Prénom</label>
-                    <input id="first_name" type="text" name="visitor[0][first_name]" class="form-control" data-type="visitor">
-                </div>
-                <div class="line-item-property__country form-group  mb-3 ml-3 mr-3">
-                    <label class="control-label required" for="visitor_country">pays</label>
-                    <div class="">
-                        <select id="visitor_country" type="text" name="visitor[0]country[]" class="form-control" data-type="visitor">
-                            <option value="france">France</option>
-                            <option value="allemagne">Allemagne</option>
-                            <option value="espagne">Espagne</option>
-                            <option value="grande-bretagne">Grande-Bretagne</option>
-                            <option value="etatsUnis">États Unis</option>
-                            <option value="chine">Chine</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="line-item-property__bithdate form-group  mb-3 ml-3 mr-3">
-                    <label class="control-label required" for="visitor_bithdate">Date de naissance</label>
-                    <input type="text" name="visitor[0]bithdate[]" class="form-control" autocomplete="off" id="visitor_bithdate" data-type="visitor"/>
-                </div>
-                <div class="line-item-property__type form-group  mb-3 ml-3 mr-3">
-                    <label class="control-label required">Type de billet</label>
-                    <input type="text" name="billet[0]type[]" class="form-control disabled-input" id="billet_type" data-type="billet"/>
-
-                </div>
-                <div class="line-item-property__email form-group  mb-3 ml-3 mr-3">
-                    <label class="control-label required">Adresse mail</label>
-                    <input id="email" type="email" name="visitor[0]email[]" class="form-control" data-type="visitor"/>
-                </div>
-                <div class="line-item-property__name form-group  mb-3 ml-3 mr-3">
-                    <label class="control-label required">Vous bénéficiez du tarif</label>
-                    <input type="text" name="tarif[0]name[]" value="" class="form-control disabled-input" id="tarif_name" data-type="tarif"/>
-                </div>
-                <div class="line-item-property__price form-group  mb-3 ml-3 mr-3">
-                    <label class="control-label required">Votre tarif</label>
-                    <input type="text" name="tarif[0]price[]" value="" class="form-control disabled-input" id="tarif_price" data-type="tarif"/>
-                </div>
-                <div class="line-item-property__visit_date form-group  mb-3 ml-3 mr-3">
-                    <label class="control-label required" for="billet_visit_date">Date de visite</label>
-                    <input type="text" name="billet[0]visit_date[]" class="form-control" autocomplete="off" id="billet_visit_date" data-type="billet" />
-                </div>
-                <div class="line-item-property__is_half form-group  mb-3 ml-3 mr-3">
-                    <label class="control-label required">Tarif réduit (Il sera
-                        nécessaire de présenter sa carte d’étudiant, militaire ou équivalent lors de
-                        l’entrée)</label>
-                    <input type="checkbox" name="billet[0]is_half" class="form-control" data-type="billet"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <button id="btnAdd" class="btn btn-primary" type="button">Ajouter un visiteur</button>
-                <button id="btnDel" class="btn btn-danger" type="button">Supprimer</button>
-                <button class="btn btn-success" type="submit">Valider</button>
-            </div>
-        </form>
+  <nav class="navbar navbar-expand-lg navbar-light bg-info ">
+    <div class="navbar-brand text-white">
+      <h3>Bienvenue au musée du Louvre</h3>
     </div>
-    <footer>
-        <div class="bas">
-            <div class="container-fluid  text-center  mt-2">
-                {% block footer %}{% endblock %}
-                <div class="footer-copyright text-white  ">
-                    © 2018 Copyright:
-                    <a> Anne Gasté </a>
-                </div>
-            </div>
+  </nav>
+  <div class="container-fluid row mt-5">
+    <div class="container col-md-8 p-3">
+      <div id="app"></div>
+    </div>
+  </div>
+  <footer>
+    <div class="bas">
+      <div class="container-fluid  text-center  mt-2">
+        {% block footer %}{% endblock %}
+        <div class="footer-copyright text-white  ">
+          © 2018 Copyright:
+          <a> Anne Gasté </a>
         </div>
-    </footer>
+      </div>
+    </div>
+  </footer>
 {% endblock %}
 

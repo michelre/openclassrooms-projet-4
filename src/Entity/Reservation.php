@@ -5,7 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use PhpParser\Node\Expr\Array_;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Type;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReservationRepository")
@@ -21,8 +22,9 @@ class Reservation
 
     /**
      * @ORM\Column(type="datetime")
+     * @Type("DateTime<'d/m/Y'>")
      */
-    private $creation_date;
+    private $creationDate;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -30,9 +32,38 @@ class Reservation
     private $code;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Visitor", mappedBy="reservation", cascade={"persist", "remove"})
+     * @ORM\Column(type="string", length=255)
+     * @Type("string")
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @SerializedName("visitDate")
+     * @Type("DateTime<'Y-m-d'>")
+     */
+    private $visitDate;
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Visitor", inversedBy="reservations", cascade={"persist"})
+     * @Type("array<App\Entity\Visitor>")
      */
     private $visitors;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @SerializedName("isHalf")
+     * @Type("boolean")
+     */
+    private $isHalf;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @SerializedName("isPayed")
+     * @Type("boolean")
+     */
+    private $isPayed;
 
 
     public function __construct()
@@ -40,50 +71,108 @@ class Reservation
         $this->visitors = new ArrayCollection();
     }
 
-
-
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
     }
 
-    public function getCreationDate(): ?\DateTimeInterface
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
     {
-        return $this->creation_date;
+        $this->id = $id;
     }
 
-    public function setCreationDate(\DateTimeInterface $creation_date): self
+    /**
+     * @return mixed
+     */
+    public function getCreationDate()
     {
-        $this->creation_date = $creation_date;
-
-        return $this;
+        return $this->creationDate;
     }
 
-    public function getCode(): ?string
+    /**
+     * @param mixed $creationDate
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCode()
     {
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    /**
+     * @param mixed $code
+     */
+    public function setCode($code)
     {
         $this->code = $code;
+    }
 
-        return $this;
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVisitDate()
+    {
+        return $this->visitDate;
+    }
+
+    /**
+     * @param mixed $visitDate
+     */
+    public function setVisitDate($visitDate)
+    {
+        $this->visitDate = $visitDate;
     }
 
     /**
      * @return Collection|Visitor[]
      */
-    public function getVisitors(): Collection
+    public function getVisitors()
     {
         return $this->visitors;
     }
+
+    /**
+     * @param mixed $visitors
+     */
+    public function setVisitors($visitors)
+    {
+        $this->visitors = $visitors;
+    }
+
+
 
     public function addVisitor(Visitor $visitor): self
     {
         if (!$this->visitors->contains($visitor)) {
             $this->visitors[] = $visitor;
-            $visitor->setReservation($this);
         }
 
         return $this;
@@ -93,17 +182,43 @@ class Reservation
     {
         if ($this->visitors->contains($visitor)) {
             $this->visitors->removeElement($visitor);
-            // set the owning side to null (unless already changed)
-            if ($visitor->getReservation() === $this) {
-                $visitor->setReservation(null);
-            }
         }
 
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getisHalf()
+    {
+        return $this->isHalf;
+    }
 
-   
+    /**
+     * @param mixed $isHalf
+     */
+    public function setIsHalf($isHalf)
+    {
+        $this->isHalf = $isHalf;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisPayed()
+    {
+        return $this->isPayed;
+    }
+
+    /**
+     * @param mixed $isPayed
+     */
+    public function setIsPayed($isPayed)
+    {
+        $this->isPayed = $isPayed;
+    }
+
 
 
 

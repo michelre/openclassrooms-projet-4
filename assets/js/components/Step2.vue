@@ -1,0 +1,50 @@
+<template>
+  <div>
+    <h1>Vos informations</h1>
+    <hr/>
+    <ul class="list-unstyled">
+      <li v-for="(visitor, i) in reservation.visitors" :key="i">
+        <form class="form-inline">
+          <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Nom et prénom" v-model="visitor.fullName">
+          <select class="form-control mb-2 mr-sm-2" v-model="visitor.country">
+            <option value="">Pays</option>
+            <option value="fr">France</option>
+            <option value="it">Italie</option>
+            <option value="es">Espagne</option>
+            <option value="us">États-Unis</option>
+          </select>
+          <input type="date" placeholder="Date de naissance" class="form-control mb-2 mr-sm-2"
+                 v-model="visitor.birthdate"
+                 @change="() => changeVisitorTarif(i)"
+          >
+          <div class="form-check mb-2 mr-sm-2">
+            <input class="form-check-input" type="checkbox" id="inlineFormCheck"
+                   v-model="visitor.isHalf"
+                   @change="() => changeVisitorTarif(i)">
+            <label class="form-check-label" for="inlineFormCheck">
+              Tarif réduit
+            </label>
+          </div>
+          <!--<button class="btn btn-danger">
+            <i class="fas fa-trash"></i>
+          </button>-->
+        </form>
+      </li>
+    </ul>
+    <button class="btn btn-primary" @click="() => navigateAction('Step1')">Précédent</button>
+    <button class="btn btn-primary" @click="() => navigateAction('Step3')">Suivant</button>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'Step2',
+    props: {
+      reservation: Object,
+      changeVisitorTarif: Function,
+      navigateAction: Function
+    },
+  }
+</script>
+
+<style lang="scss"></style>

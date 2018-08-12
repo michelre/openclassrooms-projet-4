@@ -2,10 +2,14 @@
 
 namespace App\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use App\Entity\Reservation;
+use App\Entity\Tarif;
+use App\Entity\Visitor;
+use App\Service\ReservationService;
 use JMS\Serializer\SerializerBuilder;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use ShortCode\Random;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +17,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ReservationController extends Controller
 {
+    private $reservationService;
+
+    public function __construct(ReservationService $reservationService)
+    {
+        $this->reservationService = $reservationService;
+    }
+
     /**
      * @Route("/reservation", name="reservation")
      */
@@ -21,8 +32,17 @@ class ReservationController extends Controller
         return $this->render('reservation/index.html.twig', [
 
         ]);
+    }
 
-
+    /**
+     * @Route("/api/reservation/available", name="reservationAvailable")
+     */
+    public function isReservationAvailable(request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        //$em->getRepository('App:Reservation')->findBy(["visit_date" => date_parse($request->query->get('date'))]);
+        //var_dump(date_parse($request->query->get('date')));
+        return new Response(json_encode(array("isDateAvailable" => true)));
     }
 
     /**
@@ -34,21 +54,48 @@ class ReservationController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $formFields = $request->getContent();
+        //$content = json_decode($request->getContent(), true);
+
         $serializer = SerializerBuilder::create()->build();
-        $visitors = $serializer->deserialize($formFields, 'array<App\Entity\Visitor>', 'json');
-
-        $reservation = new Reservation();
-        $reservation->setCode('ABCD');
+        /** @var Reservation $reservation */
+        $reservation = $serializer->deserialize($request->getContent(), 'App\Entity\Reservation', 'json');
+        $reservation->setCode(Random::get());
         $reservation->setCreationDate(new \DateTime());
+        $reservation->setIsPayed(false);
 
-        foreach ($visitors as $visitor) {
-            $reservation->addVisitor($visitor);
+        foreach ($reservation->getVisitors() as $visitor) {
+            /** @var Visitor $visitor */
+            $tarif = $visitor->getTarif();
+            $visitor->setTarif($em->getRepository(Tarif::class)->find($tarif));
         }
-
         $em->persist($reservation);
         $em->flush();
 
-        return new Response(json_encode(array("status" => "OK", "reservation_code" => $reservation->getCode())));
+        return new Response(json_encode(array(
+            "total" => $this->reservationService->getReservationTotal($reservation),
+            "reservation" => json_decode($serializer->serialize($reservation, 'json'), true),
+            "status" => "OK"
+        )));
+    }
+
+    /**
+     * @Route("/api/reservation/{code}/pay", name="payReservation")
+     * @Method({"PUT"})
+     * @param $code
+     * @return Response
+     */
+    public function payReservation($code)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        /** @var Reservation $reservation */
+        $reservation = $em->getRepository(Reservation::class)->findOneBy(array('code' => $code));
+        $reservation->setIsPayed(true);
+        $this->reservationService->sendMail($reservation);
+        $em->persist($reservation);
+        $em->flush();
+
+        return new Response(json_encode(array("status" => "OK")));
     }
 }

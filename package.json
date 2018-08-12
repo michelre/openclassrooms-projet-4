@@ -1,8 +1,13 @@
 {
     "devDependencies": {
         "@symfony/webpack-encore": "^0.20.1",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-preset-es2017": "^6.24.1",
         "node-sass": "^4.9.0",
-        "sass-loader": "^7.0.2"
+        "sass-loader": "^7.0.2",
+        "vue": "^2.5.16",
+        "vue-loader": "^14.2.3",
+        "vue-template-compiler": "^2.5.16"
     },
     "license": "UNLICENSED",
     "private": true,
@@ -13,10 +18,16 @@
         "build": "encore production"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.2.0",
+        "axios": "^0.18.0",
         "bootstrap": "^4.0.0-beta.2",
         "bootstrap-datepicker": "^1.8.0",
         "composer": "^3.1.0",
+        "dayjs": "^1.7.4",
+        "font-awesome": "^4.7.0",
         "jquery": "^3.3.1",
-        "manifest.json": "^1.2.0"
+        "lodash.set": "^4.3.2",
+        "manifest.json": "^1.2.0",
+        "vue-stripe-checkout": "^1.0.8"
     }
 }
