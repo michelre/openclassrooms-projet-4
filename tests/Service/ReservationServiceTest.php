@@ -1,7 +1,9 @@
 <?php
 
 
+use App\Entity\Reservation;
 use App\Entity\Tarif;
+use App\Entity\Visitor;
 use PHPUnit\Framework\TestCase;
 
 class ReservationServiceTest extends TestCase
@@ -22,10 +24,10 @@ class ReservationServiceTest extends TestCase
         $em->expects($this->any())
             ->method('getRepository')
             ->willReturn($tarifRepository);
-        $reservation = new \App\Entity\Reservation();
-        $visitor1 = new \App\Entity\Visitor();
+        $reservation = new Reservation();
+        $visitor1 = new Visitor();
         $visitor1->setTarif($tarif1);
-        $visitor2 = new \App\Entity\Visitor();
+        $visitor2 = new Visitor();
         $visitor2->setTarif($tarif1);
 
         // EXECUTE
@@ -35,6 +37,24 @@ class ReservationServiceTest extends TestCase
 
         // CHECK
         $this->assertEquals($reservationService->getReservationTotal($reservation), 20);
+    }
+
+    public function testGetNbVisitors()
+    {
+        $em = $this->createMock(\Doctrine\ORM\EntityManager::class);
+        $sm = $this->createMock(\Swift_Mailer::class);
+        $twig = $this->createMock(\Twig_Environment::class);
+        $reservationService = new \App\Service\ReservationService($em, $sm, $twig);
+        $res1 = new Reservation();
+        $res2 = new Reservation();
+        $res1->addVisitor(new Visitor());
+        $res2->addVisitor(new Visitor());
+        $reservations = [$res1, $res2];
+
+        $nbVisitors = $reservationService->getNbVisitors($reservations);
+
+        $this->assertEquals($nbVisitors, 2);
+
     }
 
 }

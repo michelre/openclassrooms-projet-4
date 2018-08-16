@@ -3,7 +3,7 @@
     <h1>Récapitulatif</h1>
     <hr/>
     <ul>
-      <li>Vous avez commandé {{nbBilletsText}} pour le {{formatDate}}</li>
+      <li>Vous avez commandé {{nbBilletsText}} pour le {{reservation.visitDate}}</li>
       <li v-if="hasHalfTarif">Certains de vos billets sont concernés par des tarifs réduits: <span class="font-weight-bold">pensez à vous munir des pièces justificatives</span></li>
       <li>Total de la réservation: {{totalReservation}}€</li>
     </ul>
@@ -38,9 +38,6 @@
       },
       nbBilletsText(){
         return (this.reservation.nbPlaces > 1) ? `${this.reservation.nbPlaces} billets` : `${this.reservation.nbPlaces} billet`
-      },
-      formatDate(){
-        return daysjs().format('DD/MM/YYYY')
       },
       totalReservation(){
         return this.reservation.visitors.reduce((acc, curr) => {

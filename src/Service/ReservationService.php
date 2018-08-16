@@ -4,7 +4,6 @@ namespace App\Service;
 
 
 use App\Entity\Reservation;
-use Swift_Attachment;
 use Twig\Environment;
 
 class ReservationService
@@ -33,7 +32,7 @@ class ReservationService
     public function sendMail(Reservation $reservation)
     {
         $message = (new \Swift_Message('Votre réservation ' . $reservation->getCode()))
-            ->setFrom($reservation->getEmail())
+            ->setFrom('louvre@mail.com')
             ->setTo($reservation->getEmail())
             ->setBody(
                 $this->twig->render(
@@ -43,6 +42,20 @@ class ReservationService
             );
 
         return $this->mailer->send($message);
+
+    }
+
+    /**
+     * @param Reservation[] $reservations
+     * @return integer
+     */
+    public function getNbVisitors($reservations)
+    {
+        $nbVisitors = 0;
+        foreach ($reservations as $reservation) {
+            $nbVisitors += count($reservation->getVisitors());
+        }
+        return $nbVisitors;
 
     }
 

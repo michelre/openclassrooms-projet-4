@@ -35,7 +35,7 @@ class Visitor
 
     /**
      * @ORM\Column(type="datetime")
-     * @Type("DateTime<'Y-m-d'>")
+     * @Type("DateTime<'d/m/Y'>")
      */
     private $birthdate;
 

@@ -6,6 +6,7 @@ use App\Entity\Reservation;
 use App\Entity\Tarif;
 use App\Entity\Visitor;
 use App\Service\ReservationService;
+use Doctrine\DBAL\Types\Type;
 use JMS\Serializer\SerializerBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -39,10 +40,23 @@ class ReservationController extends Controller
      */
     public function isReservationAvailable(request $request)
     {
+        $date = $request->query->get('date');
+        $startDate = \DateTime::createFromFormat('d/m/Y', $date)->setTime(0, 0, 0);
+        $endDate = \DateTime::createFromFormat('d/m/Y', $date)->setTime(23, 59, 59);
         $em = $this->getDoctrine()->getManager();
-        //$em->getRepository('App:Reservation')->findBy(["visit_date" => date_parse($request->query->get('date'))]);
-        //var_dump(date_parse($request->query->get('date')));
-        return new Response(json_encode(array("isDateAvailable" => true)));
+        $qb = $em
+            ->getRepository('App:Reservation')
+            ->createQueryBuilder('nbVisitorsByDate');
+
+        $reservations = $qb->select('r')
+            ->from('App:Reservation', 'r')
+            ->where($qb->expr()->between('r.visitDate', ':startDate', ':endDate'))
+            ->setParameter('startDate', $startDate, Type::DATETIME)
+            ->setParameter('endDate', $endDate, Type::DATETIME)
+            ->getQuery()
+            ->execute();
+        $nbVisitors = $this->reservationService->getNbVisitors($reservations) + $request->query->get('nbPlaces');
+        return new Response(json_encode(array("isDateAvailable" => $nbVisitors < 1000)));
     }
 
     /**

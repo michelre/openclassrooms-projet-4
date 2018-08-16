@@ -40,7 +40,7 @@ class Reservation
     /**
      * @ORM\Column(type="datetime")
      * @SerializedName("visitDate")
-     * @Type("DateTime<'Y-m-d'>")
+     * @Type("DateTime<'d/m/Y'>")
      */
     private $visitDate;
 
