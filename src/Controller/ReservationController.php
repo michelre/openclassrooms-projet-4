@@ -89,7 +89,7 @@ class ReservationController extends Controller
             "total" => $this->reservationService->getReservationTotal($reservation),
             "reservation" => json_decode($serializer->serialize($reservation, 'json'), true),
             "status" => "OK"
-        )));
+        )), 201);
     }
 
     /**
