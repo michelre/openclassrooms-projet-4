@@ -1,0 +1,21 @@
+<h3>Merci pour votre réservation</h3>
+
+<p>Voici un récapitulatif de votre réservation</p>
+
+<ul>
+  <li>Code: {{ reservation.code }}</li>
+  <li>Date: {{ reservation.visitDate | date('d/m/Y')}}</li>
+  <li>Total: {{ total }}€</li>
+</ul>
+
+<p>Voici les visiteurs concernés par votre réservation:</p>
+<ul>
+  {% for visitor in reservation.visitors %}
+  <li>{{ visitor.fullName }}</li>
+  {% endfor %}
+</ul>
+
+<p>Merci</p>
+
+<img src="{{ absolute_url(asset('image/logo.gif')) }}" alt="{{ absolute_url(asset('image/logo.gif')) }}">
+
