@@ -3,26 +3,26 @@
 {% block title %}Infos personnelles{% endblock %}
 
 {% block body %}
-  <nav class="navbar navbar-expand-lg navbar-light bg-info ">
-    <div class="navbar-brand text-white">
-      <h3>Bienvenue au musée du Louvre</h3>
-    </div>
-  </nav>
-  <div class="container-fluid row mt-5">
-    <div class="container col-md-8 p-3">
-      <div id="app"></div>
-    </div>
-  </div>
-  <footer>
-    <div class="bas">
-      <div class="container-fluid  text-center  mt-2">
-        {% block footer %}{% endblock %}
-        <div class="footer-copyright text-white  ">
-          © 2018 Copyright:
-          <a> Anne Gasté </a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-info ">
+        <div class="navbar-brand text-white">
+            <h3><a class="text-white" href="../reservation">Bienvenue au musée du Louvre</a></h3>
         </div>
-      </div>
+    </nav>
+    <div class="container-fluid row mt-5">
+        <div class="container col-md-8 p-3">
+            <div id="app"></div>
+        </div>
     </div>
-  </footer>
+    <footer>
+        <div class="bas">
+            <div class="container-fluid  text-center  mt-2">
+                {% block footer %}{% endblock %}
+                <div class="footer-copyright text-white  ">
+                    © 2018 Copyright:
+                    <a> Anne Gasté </a>
+                </div>
+            </div>
+        </div>
+    </footer>
 {% endblock %}
 

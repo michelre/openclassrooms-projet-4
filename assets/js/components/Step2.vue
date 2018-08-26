@@ -15,10 +15,10 @@
                         <option value="us">États-Unis</option>
                     </select>
                     <datepicker
-                        placeholder="Date de naissance"
-                        input-class="form-control"
-                        :format="'dd/MM/yyyy'"
-                        @selected="(d) => changeVisitorTarif(d, i)"
+                            placeholder="Date de naissance"
+                            input-class="form-control"
+                            :format="'dd/MM/yyyy'"
+                            @selected="(d) => changeVisitorTarif(d, i)"
                     ></datepicker>
                     <div class="form-check mb-2 mr-sm-2">
                         <input class="form-check-input" type="checkbox" id="inlineFormCheck"
@@ -28,9 +28,6 @@
                             Tarif réduit
                         </label>
                     </div>
-                    <!--<button class="btn btn-danger">
-                      <i class="fas fa-trash"></i>
-                    </button>-->
                 </form>
             </li>
         </ul>

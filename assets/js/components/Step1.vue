@@ -59,7 +59,7 @@
           return {
               disabledDates: {
                   customPredictor(date){
-                      const excludedDatesConditions = dayjs(date).day() === 2 ||
+                      const excludedDatesConditions = dayjs(date).day() === 2 || dayjs(date).day() === 0 ||
                           dayjs(date).format('DDMM') === '0105' ||
                           dayjs(date).format('DDMM') === '1111' ||
                           dayjs(date).format('DDMM') === '2512';
