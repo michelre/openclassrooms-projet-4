@@ -19,10 +19,12 @@ use Symfony\Component\HttpFoundation\Response;
 class ReservationController extends Controller
 {
     private $reservationService;
+    private $random;
 
     public function __construct(ReservationService $reservationService)
     {
         $this->reservationService = $reservationService;
+        $this->random = new \PragmaRX\Random\Random();
     }
 
     /**
@@ -73,7 +75,7 @@ class ReservationController extends Controller
         $serializer = SerializerBuilder::create()->build();
         /** @var Reservation $reservation */
         $reservation = $serializer->deserialize($request->getContent(), 'App\Entity\Reservation', 'json');
-        $reservation->setCode(Random::get());
+        $reservation->setCode($this->random->size(8)->get());
         $reservation->setCreationDate(new \DateTime());
         $reservation->setIsPayed(false);
 
