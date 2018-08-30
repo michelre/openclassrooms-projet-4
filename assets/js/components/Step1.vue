@@ -39,54 +39,51 @@
 </template>
 
 <script>
-    import axios from 'axios'
-    import Datepicker from 'vuejs-datepicker';
-    import dayjs from 'dayjs'
+  import axios from 'axios'
+  import Datepicker from 'vuejs-datepicker';
+  import dayjs from 'dayjs'
 
-    export default {
-        name: 'Step1',
-        components: {Datepicker},
-        props: {
-            reservation: Object,
-            isCheckingAvailability: Boolean,
-            setIsDateAvailable: Function,
-            setNbBillets: Function,
-            navigateAction: Function,
-            onDataChange: Function,
-            onVisitDateChange: Function,
-        },
-        data() {
-          return {
-              disabledDates: {
-                  customPredictor(date){
-                      const excludedDatesConditions = dayjs(date).day() === 2 || dayjs(date).day() === 0 ||
-                          dayjs(date).format('DDMM') === '0105' ||
-                          dayjs(date).format('DDMM') === '1111' ||
-                          dayjs(date).format('DDMM') === '2512';
-                      if(dayjs().hour() > 14){
-                          return dayjs(date).isBefore(new Date()) || excludedDatesConditions
-                      }
-                      return dayjs(date).isBefore(new Date()) || excludedDatesConditions
-                  }
-              }
+  export default {
+    name: 'Step1',
+    components: {Datepicker},
+    props: {
+      reservation: Object,
+      isCheckingAvailability: Boolean,
+      setIsDateAvailable: Function,
+      setNbBillets: Function,
+      navigateAction: Function,
+      onDataChange: Function,
+      onVisitDateChange: Function,
+    },
+    data() {
+      return {
+        disabledDates: {
+          customPredictor(date) {
+            const excludedDatesConditions = dayjs(date).day() === 2 || dayjs(date).day() === 0 ||
+              dayjs(date).format('DDMM') === '0105' ||
+              dayjs(date).format('DDMM') === '1111' ||
+              dayjs(date).format('DDMM') === '2512';
+            return dayjs(date).isBefore(dayjs().subtract(1, 'day')) || excludedDatesConditions
           }
-        },
-        computed: {
-            showImpossibleAlert() {
-                const {isDateAvailable, visitDate} = this.reservation
-                return isDateAvailable !== null && !isDateAvailable && visitDate
-            }
-        },
-        methods: {
-            clickNextAction() {
-                this.setNbBillets();
-                this.navigateAction('Step2')
-            },
-            customFormatter(date) {
-                return dayjs(date).format('DD/MM/YYYY');
-            }
         }
+      }
+    },
+    computed: {
+      showImpossibleAlert() {
+        const {isDateAvailable, visitDate} = this.reservation
+        return isDateAvailable !== null && !isDateAvailable && visitDate
+      }
+    },
+    methods: {
+      clickNextAction() {
+        this.setNbBillets();
+        this.navigateAction('Step2')
+      },
+      customFormatter(date) {
+        return dayjs(date).format('DD/MM/YYYY');
+      }
     }
+  }
 </script>
 
 <style lang="scss"></style>
