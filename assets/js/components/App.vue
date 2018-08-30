@@ -54,7 +54,8 @@
                 if (visitor.isHalf) {
                     return this.tarifs.find(t => t.name === 'réduit');
                 }
-                const age = dayjs().diff(visitor.birthdate, 'year')
+                const [d, m, y] = visitor.birthdate.split('/');
+                const age = dayjs().diff(`${y}-${m}-${d}`, 'year')
                 if (age >= 0 && age < 4) {
                     return this.tarifs.find(t => t.name === 'gratuit');
                 }

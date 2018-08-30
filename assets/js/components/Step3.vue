@@ -41,7 +41,6 @@
       },
       totalReservation(){
         return this.reservation.visitors.reduce((acc, curr) => {
-          console.log(curr.tarif)
           return acc + curr.tarif.price
         }, 0)
       }

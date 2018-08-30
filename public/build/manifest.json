@@ -1,21 +1,5 @@
 {
-  "build/js/app.js": "/build/js/app.f1af3a70.js",
-  "build/js/app.css": "/build/js/app.d41d8cd9.css",
-  "build/css/app.css": "/build/css/app.f1d273ef.css",
-  "build/fonts/fa-regular-400.woff2": "/build/fonts/fa-regular-400.8d9ab84b.woff2",
-  "build/fonts/fa-solid-900.woff2": "/build/fonts/fa-solid-900.b75b4bfe.woff2",
-  "build/fonts/fa-solid-900.ttf": "/build/fonts/fa-solid-900.132e9759.ttf",
-  "build/fonts/fa-brands-400.eot": "/build/fonts/fa-brands-400.e8019d50.eot",
-  "build/fonts/fa-regular-400.eot": "/build/fonts/fa-regular-400.e6c93cb4.eot",
-  "build/fonts/fa-brands-400.woff": "/build/fonts/fa-brands-400.da408238.woff",
-  "build/fonts/fa-solid-900.eot": "/build/fonts/fa-solid-900.ea363ed4.eot",
-  "build/fonts/fa-solid-900.woff": "/build/fonts/fa-solid-900.2d0415fa.woff",
-  "build/fonts/fa-regular-400.woff": "/build/fonts/fa-regular-400.dad90637.woff",
-  "build/images/fa-solid-900.svg": "/build/images/fa-solid-900.de1d242d.svg",
-  "build/images/fa-regular-400.svg": "/build/images/fa-regular-400.ba2a91dc.svg",
-  "build/fonts/fa-regular-400.ttf": "/build/fonts/fa-regular-400.8d220c79.ttf",
-  "build/fonts/fa-brands-400.ttf": "/build/fonts/fa-brands-400.fdf44bc4.ttf",
-  "build/images/louvre.jpg": "/build/images/louvre.d54679a8.jpg",
-  "build/fonts/fa-brands-400.woff2": "/build/fonts/fa-brands-400.6814d0e8.woff2",
-  "build/images/fa-brands-400.svg": "/build/images/fa-brands-400.83e6c29f.svg"
+  "build/js/app.js": "/build/js/app.js",
+  "build/js/app.css": "/build/js/app.css",
+  "build/css/app.css": "/build/css/app.css"
 }
